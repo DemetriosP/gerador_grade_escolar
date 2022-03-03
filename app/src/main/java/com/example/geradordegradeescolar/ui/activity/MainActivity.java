@@ -1,8 +1,10 @@
-package com.example.geradordegradeescolar;
+package com.example.geradordegradeescolar.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.geradordegradeescolar.R;
 
 public class MainActivity extends AppCompatActivity {
 

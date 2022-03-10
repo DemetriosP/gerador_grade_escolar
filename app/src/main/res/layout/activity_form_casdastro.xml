@@ -5,19 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.FormLogin">
+    tools:context=".ui.activity.FormCasdastro">
 
     <TextView
         android:id="@+id/textCadastre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/entrar"
+        android:text="@string/cadastre_se"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="40sp"
         android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editNome"
+        style="@style/Edit_Text"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:hint="@string/nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCadastre" />
 
     <EditText
         android:id="@+id/editEmail"
@@ -30,7 +43,7 @@
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCadastre" />
+        app:layout_constraintTop_toBottomOf="@+id/editNome" />
 
     <EditText
         android:id="@+id/editSenha"
@@ -46,53 +59,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
+    <EditText
+        android:id="@+id/editConfirmarSenha"
+        style="@style/Edit_Text"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:importantForAutofill="no"
+        android:inputType="numberPassword"
+        android:hint="@string/confirmar_senha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btCadastrese"
         style="@style/Button"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:text="@string/entrar"
+        android:text="@string/criar_conta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
-
-    <TextView
-        android:id="@+id/textEsqueceuSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/esqueceu_sua_senha"
-        android:textColor="@color/soft_blue"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCadastrese" />
-
-    <TextView
-        android:id="@+id/textCadastrese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="@string/cadastre_se"
-        android:textColor="@color/soft_blue"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEsqueceuSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
 
     <TextView
         android:id="@+id/textNaoConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="90dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/nao_conta"
+        android:layout_marginEnd="20dp"
+        android:text="@string/tem_conta"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/textCadastrese"
+        app:layout_constraintEnd_toStartOf="@+id/textEntrar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEsqueceuSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/btCadastrese" />
+
+    <TextView
+        android:id="@+id/textEntrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="90dp"
+        android:text="@string/entrar"
+        android:textColor="@color/soft_blue"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCadastrese" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

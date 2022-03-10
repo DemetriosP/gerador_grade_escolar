@@ -8,28 +8,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
 
-public class FormLogin extends AppCompatActivity {
+public class FormCasdastro extends AppCompatActivity {
 
-    private TextView cadastrese;
+    private TextView entrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_login);
+        setContentView(R.layout.activity_form_casdastro);
         iniciarComponentes();
-        vaiTelaCadastrese();
-    }
 
-    private void vaiTelaCadastrese() {
-        cadastrese.setOnClickListener(v -> {
-            Intent intent = new Intent(FormLogin.this, FormCasdastro.class);
+        entrar.setOnClickListener(v -> {
+            Intent intent = new Intent(FormCasdastro.this, FormLogin.class);
             startActivity(intent);
             finish();
         });
+
     }
 
     private void iniciarComponentes(){
-        cadastrese = findViewById(R.id.textCadastrese);
+        entrar = findViewById(R.id.textEntrar);
     }
-
 }

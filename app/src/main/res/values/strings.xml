@@ -6,4 +6,8 @@
     <string name="esqueceu_sua_senha">Esqueceu sua Senha?</string>
     <string name="cadastre_se">Cadastre-se</string>
     <string name="nao_conta">Não tem uma conta?</string>
+    <string name="criar_conta">Criar conta</string>
+    <string name="tem_conta">Já tem uma conta?</string>
+    <string name="nome">Nome</string>
+    <string name="confirmar_senha">Confirmar Senha</string>
 </resources>

@@ -8,7 +8,6 @@ public class Disciplina {
     private int horarioFn;
     private String situacao;
 
-
     public Disciplina(String nome, String diaSemana, int horarioIn, int horarioFn, String situacao) {
         this.nome = nome;
         this.diaSemana = diaSemana;

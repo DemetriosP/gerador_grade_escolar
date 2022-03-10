@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Gerador de Grade Escolar</string>
+    <string name="entrar">Entrar</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="esqueceu_sua_senha">Esqueceu sua Senha?</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="nao_conta">Não tem uma conta?</string>
 </resources>

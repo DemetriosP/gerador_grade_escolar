@@ -23,7 +23,6 @@ public class FormCasdastro extends AppCompatActivity {
         setContentView(R.layout.activity_form_casdastro);
         iniciarComponentes();
         vaiTelaLogin();
-
     }
 
     private void vaiTelaLogin() {

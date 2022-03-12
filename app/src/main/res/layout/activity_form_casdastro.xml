@@ -19,59 +19,96 @@
         android:textSize="40sp"
         android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/editNome"
-        style="@style/Edit_Text"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editNomeLayoyt"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:layout_marginEnd="40dp"
         android:hint="@string/nome"
+        android:textColorHint="@color/gray"
+        app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCadastre" />
+        app:layout_constraintTop_toBottomOf="@+id/textCadastre">
 
-    <EditText
-        android:id="@+id/editEmail"
-        style="@style/Edit_Text"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNome"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editEmailLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
+        android:layout_marginEnd="40dp"
         android:hint="@string/email"
+        android:textColorHint="@color/gray"
+        app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNome" />
+        app:layout_constraintTop_toBottomOf="@+id/editNomeLayoyt"
+        >
 
-    <EditText
-        android:id="@+id/editSenha"
-        style="@style/Edit_Text"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editEmail"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSenhaLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
-        android:importantForAutofill="no"
-        android:inputType="numberPassword"
+        android:layout_marginEnd="40dp"
         android:hint="@string/senha"
+        android:textColorHint="@color/gray"
+        app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmailLayout"
+        app:endIconMode="password_toggle">
 
-    <EditText
-        android:id="@+id/editConfirmarSenha"
-        style="@style/Edit_Text"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSenha"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editSenhaConfirmarLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
-        android:importantForAutofill="no"
-        android:inputType="numberPassword"
+        android:layout_marginEnd="40dp"
         android:hint="@string/confirmar_senha"
+        android:textColorHint="@color/gray"
+        app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editSenhaLayout"
+        app:endIconMode="password_toggle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editConfirmarSenha"
+            style="@style/Edit_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btEntrar"
@@ -82,7 +119,7 @@
         android:text="@string/criar_conta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editSenhaConfirmarLayout" />
 
     <TextView
         android:id="@+id/textNaoConta"

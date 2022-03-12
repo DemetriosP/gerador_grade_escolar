@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeradorDeGradeEscolar">
         <activity
+            android:name=".ui.activity.FormDisciplina"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.FormCasdastro"
             android:exported="false" />
         <activity

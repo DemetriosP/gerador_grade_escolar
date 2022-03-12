@@ -2,6 +2,7 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,9 +52,8 @@ public class FormLogin extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
 
                     if(task.isSuccessful()){
-                        Toast.makeText(this, "Login efetuado com sucesso", Toast.LENGTH_LONG).show();
                         //progressBar.setVisibility(View.VISIBLE);
-                        //new Handler().postDelayed(this::TelaPrincipal, 3000);
+                        new Handler().postDelayed(this::Perfil, 1000);
                     }else{
                         try {
                             throw Objects.requireNonNull(task.getException());
@@ -64,6 +64,12 @@ public class FormLogin extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void Perfil() {
+        Intent intent = new Intent(FormLogin.this, FormDisciplina.class);
+        startActivity(intent);
+        finish();
     }
 
     private void vaiTelaCadastrese() {

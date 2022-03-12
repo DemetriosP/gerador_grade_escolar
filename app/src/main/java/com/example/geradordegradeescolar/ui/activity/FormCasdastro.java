@@ -113,7 +113,7 @@ public class FormCasdastro extends AppCompatActivity {
     private void iniciarComponentes() {
         tvEntrar = findViewById(R.id.textEntrar);
         etSenha = findViewById(R.id.editSenha);
-        btCriarConta = findViewById(R.id.btCadastrese);
+        btCriarConta = findViewById(R.id.btEntrar);
         etConfirmarSenha = findViewById(R.id.editConfirmarSenha);
         etNome = findViewById(R.id.editNome);
         etEmail = findViewById(R.id.editEmail);

@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editSenha" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btCadastrese"
+        android:id="@+id/btEntrar"
         style="@style/Button"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -96,7 +96,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/textEntrar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCadastrese" />
+        app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
 
     <TextView
         android:id="@+id/textEntrar"
@@ -108,7 +108,7 @@
         android:textColor="@color/soft_blue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btCadastrese" />
+        app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

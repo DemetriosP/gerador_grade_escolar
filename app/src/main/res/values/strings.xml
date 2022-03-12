@@ -11,4 +11,20 @@
     <string name="nome">Nome</string>
     <string name="confirmar_senha">Confirmar Senha</string>
     <string name="campo_vazio">Preencha o campo</string>
+    <string name="situacao">Situação</string>
+    <string name="dia">Dia</string>
+
+    <string-array name="situacao">
+        <item>Concluído</item>
+        <item>Pendente</item>
+    </string-array>
+
+    <string-array name="dia">
+        <item>Segunda</item>
+        <item>Terça</item>
+        <item>Quarta</item>
+        <item>Quinta</item>
+        <item>Sexta</item>
+    </string-array>
+
 </resources>

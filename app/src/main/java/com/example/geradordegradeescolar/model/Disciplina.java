@@ -1,5 +1,7 @@
 package com.example.geradordegradeescolar.model;
 
+import java.util.ArrayList;
+
 public class Disciplina {
 
     private String nome;
@@ -7,6 +9,7 @@ public class Disciplina {
     private int horarioIn;
     private int horarioFn;
     private String situacao;
+    private ArrayList<Disciplina> preRequisitos;
 
     public Disciplina(String nome, String diaSemana, int horarioIn, int horarioFn, String situacao) {
         this.nome = nome;

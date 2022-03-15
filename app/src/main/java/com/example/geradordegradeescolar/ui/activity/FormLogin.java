@@ -53,7 +53,7 @@ public class FormLogin extends AppCompatActivity {
 
                     if(task.isSuccessful()){
                         //progressBar.setVisibility(View.VISIBLE);
-                        new Handler().postDelayed(this::Perfil, 1000);
+                        new Handler().postDelayed(this::vaiTelaDisciplina, 1000);
                     }else{
                         try {
                             throw Objects.requireNonNull(task.getException());
@@ -66,18 +66,18 @@ public class FormLogin extends AppCompatActivity {
 
     }
 
-    private void Perfil() {
-        Intent intent = new Intent(FormLogin.this, FormDisciplina.class);
-        startActivity(intent);
-        finish();
-    }
-
     private void vaiTelaCadastrese() {
         cadastrese.setOnClickListener(v -> {
             Intent intent = new Intent(FormLogin.this, FormCasdastro.class);
             startActivity(intent);
             finish();
         });
+    }
+
+    private void vaiTelaDisciplina() {
+        Intent intent = new Intent(FormLogin.this, FormDisciplina.class);
+        startActivity(intent);
+        finish();
     }
 
     private void iniciarComponentes(){

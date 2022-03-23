@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class FormDisciplina extends AppCompatActivity {
 
@@ -32,6 +34,7 @@ public class FormDisciplina extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Cadastrar Disciplina");
         setContentView(R.layout.activity_form_disciplina);
         iniciarComponentes();
         preencheDrompDownMenu(situacoes, autoSituacao);
@@ -70,7 +73,9 @@ public class FormDisciplina extends AppCompatActivity {
         disciplinas.put("horaIni", horaIni);
         disciplinas.put("horaFim", horaFim);
 
-        DocumentReference referencia = db.collection("Disciplinas").document();
+        String usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        DocumentReference referencia = db.collection("Disciplinas").document(usuarioID);
 
         referencia.set(disciplinas).addOnSuccessListener(aVoid ->
                 Log.d("db", "Disciplina Salva")).addOnFailureListener
@@ -83,7 +88,9 @@ public class FormDisciplina extends AppCompatActivity {
         disciplinas.put("nome", nome);
         disciplinas.put("situacao", situacao);
 
-        DocumentReference referencia = db.collection("Disciplinas").document();
+        String usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        DocumentReference referencia = db.collection("Disciplinas").document(usuarioID);
 
         referencia.set(disciplinas).addOnSuccessListener(aVoid ->
                 Log.d("db", "Disciplina Salva")).addOnFailureListener

@@ -26,6 +26,7 @@ public class FormLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_form_login);
         iniciarComponentes();
         vaiTelaCadastrese();

@@ -33,6 +33,7 @@ public class FormCasdastro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_form_casdastro);
         iniciarComponentes();
         CadastrarUsuario();

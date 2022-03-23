@@ -16,6 +16,7 @@
     <string name="horario_inicial">Horário Inicial</string>
     <string name="horario_final">Horário Final</string>
     <string name="salvar">Salvar</string>
+    <string name="disciplina">Disciplina</string>
 
     <string-array name="situacao">
         <item>Concluído</item>

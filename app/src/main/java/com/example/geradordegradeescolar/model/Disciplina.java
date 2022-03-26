@@ -1,8 +1,11 @@
 package com.example.geradordegradeescolar.model;
 
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Disciplina {
+public class Disciplina implements Serializable {
 
     private String nome;
     private String diaSemana;
@@ -11,12 +14,20 @@ public class Disciplina {
     private String situacao;
     private ArrayList<Disciplina> preRequisitos;
 
-    public Disciplina(String nome, String diaSemana, int horarioIn, int horarioFn, String situacao) {
+    public Disciplina(String nome, String situacao){
         this.nome = nome;
+        this.situacao = situacao;
+    }
+
+    public Disciplina(String nome, String situacao, String diaSemana, int horarioIn, int horarioFn) {
+        this.nome = nome;
+        this.situacao = situacao;
         this.diaSemana = diaSemana;
         this.horarioIn = horarioIn;
         this.horarioFn = horarioFn;
-        this.situacao = situacao;
+    }
+
+    public Disciplina() {
     }
 
     public String getNome() {
@@ -57,5 +68,11 @@ public class Disciplina {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return nome + "\nSituação: " + situacao;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.geradordegradeescolar.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +31,7 @@ public class FormDisciplina extends AppCompatActivity {
     private String horaIni, horaFim, nome, situacao, dia;
     private TextInputLayout diaLayout, horaIniLayout, horaFinLayout;
     private Button btSalvar;
+    private Disciplina disciplina;
     final private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -41,6 +44,7 @@ public class FormDisciplina extends AppCompatActivity {
         preencheDrompDownMenu(dias, autoDia);
         configuraOnClinkDrop();
         cadastrarDisciplina();
+        carregaDisciplina();
     }
 
     private void cadastrarDisciplina() {
@@ -102,15 +106,17 @@ public class FormDisciplina extends AppCompatActivity {
         autoSituacao.setOnItemClickListener((parent, view, position, id) -> {
             String x = (String) parent.getItemAtPosition(position);
             if (x.equals(situacoes[1])) {
-                diaLayout.setVisibility(View.VISIBLE);
-                horaIniLayout.setVisibility(View.VISIBLE);
-                horaFinLayout.setVisibility(View.VISIBLE);
+                alteraVisbilidadeCampos(View.VISIBLE);
             } else {
-                diaLayout.setVisibility(View.INVISIBLE);
-                horaIniLayout.setVisibility(View.INVISIBLE);
-                horaFinLayout.setVisibility(View.INVISIBLE);
+                alteraVisbilidadeCampos(View.INVISIBLE);
             }
         });
+    }
+
+    private void alteraVisbilidadeCampos(int visible) {
+        diaLayout.setVisibility(visible);
+        horaIniLayout.setVisibility(visible);
+        horaFinLayout.setVisibility(visible);
     }
 
     private void preencheDrompDownMenu(String[] valores, AutoCompleteTextView menu) {
@@ -119,6 +125,31 @@ public class FormDisciplina extends AppCompatActivity {
 
         menu.setAdapter(adapter);
         menu.setThreshold(1);
+    }
+
+    private void carregaDisciplina(){
+        Intent dados = getIntent();
+        if (dados.hasExtra("disciplina")) {
+            setTitle("Editar Disciplina");
+            disciplina = (Disciplina) dados.getSerializableExtra("disciplina");
+            preencheCampos();
+        } else {
+            setTitle("Cadastrar Disciplina");
+            disciplina = new Disciplina();
+        }
+    }
+
+    private void preencheCampos() {
+        etNome.setText(disciplina.getNome());
+        autoSituacao.setText(disciplina.getSituacao(), false);
+
+        if(disciplina.getSituacao().equals(situacoes[1])){
+            alteraVisbilidadeCampos(View.VISIBLE);
+            autoDia.setText(disciplina.getDiaSemana(), false);
+            etHoraIni.setText(String.valueOf(disciplina.getHorarioIn()));
+            etHoraFim.setText(String.valueOf(disciplina.getHorarioFn()));
+        }
+
     }
 
     private void iniciarComponentes() {

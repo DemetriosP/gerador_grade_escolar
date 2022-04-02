@@ -15,8 +15,9 @@ public class DaoOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(ScriptDLL.getCreateTableDisciplina());
         db.execSQL(ScriptDLL.getCreateTableUsuario());
-
+        db.execSQL(ScriptDLL.getCreateTableReferencia());
     }
 
     @Override

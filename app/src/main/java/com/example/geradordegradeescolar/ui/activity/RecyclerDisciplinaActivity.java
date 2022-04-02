@@ -8,17 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.dao.Conexao;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
@@ -29,10 +24,13 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_disciplina);
-        setTitle("Disciplinas");
+        setTitle("Disciplinas" );
 
-        DisciplinaDAO dao = new DisciplinaDAO();
-        ArrayList<Disciplina> disciplinas = new ArrayList<>();
+        Conexao conexao = new Conexao(this);
+
+        DisciplinaDAO dao = new DisciplinaDAO(conexao.getConexao());
+
+        ArrayList<Disciplina> disciplinas = new ArrayList<>(dao.buscaTodos());
 
         RecyclerView disciplinasRecycler = findViewById(R.id.disciplina_recycler);
 
@@ -40,6 +38,8 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
         RecyclerDisciplinaAdapter adapter = new RecyclerDisciplinaAdapter(this, disciplinas);
         disciplinasRecycler.setAdapter(adapter);
         disciplinasRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        configurarFabNovaDisciplina();
 
     }
 
@@ -53,7 +53,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
      */
 
-    private void configuraRecycler(){
+    private void configuraRecycler() {
         RecyclerView disciplinaRecycler = findViewById(R.id.disciplina_recycler);
         recyclerDisciplinaView.configuraAdapter(disciplinaRecycler);
     }

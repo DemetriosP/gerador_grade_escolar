@@ -26,11 +26,9 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
 
     public RecyclerDisciplinaAdapter(Context contexto) {
         this.context = contexto;
-        DisciplinaDAO dao = new DisciplinaDAO();
-        disciplinass.addAll(dao.todasDisciplinas());
     }
 
-    public RecyclerDisciplinaAdapter(Context contexto, ArrayList<Disciplina> d){
+    public RecyclerDisciplinaAdapter(Context contexto, ArrayList<Disciplina> d) {
         this.context = contexto;
         this.disciplinas = d;
     }

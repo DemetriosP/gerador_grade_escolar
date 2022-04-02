@@ -10,19 +10,17 @@ public class RecyclerDisciplinaView {
 
     private final Context contexto;
     private final RecyclerDisciplinaAdapter adapter;
-    private final DisciplinaDAO dao;
 
-    public RecyclerDisciplinaView(Context contexto){
+    public RecyclerDisciplinaView(Context contexto) {
         this.contexto = contexto;
         this.adapter = new RecyclerDisciplinaAdapter(this.contexto);
-        dao = new DisciplinaDAO();
     }
 
-    public void atualizaDisciplinas(){
-        adapter.atualiza(dao.todasDisciplinas());
+    public void atualizaDisciplinas() {
+
     }
 
-    public void configuraAdapter(RecyclerView disciplinaRecycler){
+    public void configuraAdapter(RecyclerView disciplinaRecycler) {
         disciplinaRecycler.setAdapter(adapter);
     }
 

@@ -2,8 +2,6 @@ package com.example.geradordegradeescolar.model;
 
 import androidx.annotation.NonNull;
 
-import com.google.firebase.firestore.DocumentReference;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

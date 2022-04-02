@@ -12,15 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class FormCasdastro extends AppCompatActivity {
@@ -46,10 +38,6 @@ public class FormCasdastro extends AppCompatActivity {
 
             converteComponentesString();
 
-            if (verificaCampos()) {
-                if (comprarSenhas()) cadastrarUsuarioFirebase(v);
-                else mensagem(v, "As senhas não correpondem");
-            } else mensagem(v, "Preencha todos os campos!");
         });
     }
 
@@ -64,43 +52,8 @@ public class FormCasdastro extends AppCompatActivity {
         return !nome.isEmpty() && !email.isEmpty() && !senha.isEmpty() && !confirmarSenha.isEmpty();
     }
 
-    private void cadastrarUsuarioFirebase(View v) {
-
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).
-                addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        salvarDadosUsuario();
-                        mensagem(v, "Usuário cadastrado");
-                    } else {
-                        String erro;
-                        try {
-                            throw Objects.requireNonNull(task.getException());
-                        } catch (FirebaseAuthWeakPasswordException e) {
-                            erro = "Digite uma senha com no mínimo 6 caracteres";
-                        } catch (FirebaseAuthUserCollisionException e) {
-                            erro = "Esta conta já foi cadastrada";
-                        } catch (FirebaseAuthInvalidCredentialsException e) {
-                            erro = "E-mail inválido";
-                        } catch (Exception e) {
-                            erro = "Erro ao cadastrar usuário";
-                        }
-                        mensagem(v, erro);
-                    }
-                });
-    }
-
     private void salvarDadosUsuario() {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Map<String, Object> usuarios = new HashMap<>();
-        usuarios.put("nome", nome);
-
-        String usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-        DocumentReference referencia = db.collection("Usuarios").document(usuarioID);
-
-        referencia.set(usuarios);
     }
 
     private void vaiTelaLogin() {

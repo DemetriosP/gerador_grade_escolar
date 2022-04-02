@@ -9,11 +9,14 @@ import androidx.appcompat.app.AlertDialog;
 
 public class Conexao {
 
-    private Conexao(Context context){
+    DaoOpenHelper dao;
+    SQLiteDatabase conexao;
+
+    public Conexao(Context context){
 
         try {
-            DaoOpenHelper dao = new DaoOpenHelper(context);
-            SQLiteDatabase conexao = dao.getWritableDatabase();
+            this.dao = new DaoOpenHelper(context);
+            this.conexao = dao.getWritableDatabase();
             Toast.makeText(context, "Conexão criada com sucesso", Toast.LENGTH_SHORT).show();
 
         } catch (SQLException ex){
@@ -25,5 +28,21 @@ public class Conexao {
             dlg.show();
 
         }
+    }
+
+    public DaoOpenHelper getDao() {
+        return dao;
+    }
+
+    public void setDao(DaoOpenHelper dao) {
+        this.dao = dao;
+    }
+
+    public SQLiteDatabase getConexao() {
+        return conexao;
+    }
+
+    public void setConexao(SQLiteDatabase conexao) {
+        this.conexao = conexao;
     }
 }

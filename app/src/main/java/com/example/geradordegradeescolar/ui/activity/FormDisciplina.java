@@ -1,6 +1,9 @@
 package com.example.geradordegradeescolar.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,9 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.dao.Conexao;
+import com.example.geradordegradeescolar.dao.DaoOpenHelper;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.textfield.TextInputLayout;
@@ -25,19 +31,53 @@ public class FormDisciplina extends AppCompatActivity {
     private TextInputLayout diaLayout, horaIniLayout, horaFinLayout;
     private Button btSalvar;
     private Disciplina disciplina;
-    private final DisciplinaDAO dao = new DisciplinaDAO();
+    private DisciplinaDAO disciplinaDao;
+
+    private SQLiteDatabase conexao;
+    private DaoOpenHelper daoOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_disciplina);
+        conexao();
+        //Conexao conexao = new Conexao(this);
+        //disciplinaDao = new DisciplinaDAO(conexao.getConexao());
         iniciarComponentes();
         preencheDrompDownMenu(situacoes, autoSituacao);
         preencheDrompDownMenu(dias, autoDia);
         configuraOnClinkDrop();
         cadastrarDisciplina();
         carregaDisciplina();
+
+
+        //DisciplinaDAO disciplinaDao = new DisciplinaDAO(conexao);
+
     }
+
+
+
+    public void conexao(){
+
+        try {
+            this.daoOpenHelper = new DaoOpenHelper(this);
+            this.conexao = daoOpenHelper.getWritableDatabase();
+            Toast.makeText(this, "Conexão criada com sucesso", Toast.LENGTH_SHORT).show();
+
+            disciplinaDao = new DisciplinaDAO(conexao);
+
+        } catch (SQLException ex){
+
+            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            dlg.setTitle("Erro");
+            dlg.setMessage(ex.getMessage());
+            dlg.setNeutralButton("OK", null);
+            dlg.show();
+
+        }
+    }
+
+
 
     private void cadastrarDisciplina() {
 
@@ -56,10 +96,11 @@ public class FormDisciplina extends AppCompatActivity {
                     disciplina.setDiaSemana(null);
                     disciplina.setHorarioIn(null);
                     disciplina.setHorarioFn(null);
-                    dao.alterar(disciplina);
+                    disciplinaDao.alterar(disciplina);
                 }else {
                     disciplina = new Disciplina(nome, situacao);
-                    dao.inserir(disciplina);
+                    disciplinaDao.inserir(disciplina);
+                    Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
                 }
                 finish();
             } else if (situacao.equals("Pendente")) {
@@ -72,10 +113,11 @@ public class FormDisciplina extends AppCompatActivity {
                         disciplina.setDiaSemana(dia);
                         disciplina.setHorarioIn(horaIni);
                         disciplina.setHorarioFn(horaFim);
-                        dao.alterar(disciplina);
+                        disciplinaDao.alterar(disciplina);
                     }else {
                         disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
-                        dao.inserir(disciplina);
+                        disciplinaDao.inserir(disciplina);
+                        Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
                     }
                     finish();
                 }

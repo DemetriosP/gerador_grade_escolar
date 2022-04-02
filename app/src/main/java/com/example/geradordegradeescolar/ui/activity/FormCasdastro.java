@@ -44,16 +44,16 @@ public class FormCasdastro extends AppCompatActivity {
 
         btCriarConta.setOnClickListener(v -> {
 
-           converteComponentesString();
+            converteComponentesString();
 
-           if(verificaCampos()) {
-               if(comprarSenhas()) cadastrarUsuarioFirebase(v);
-               else mensagem(v, "As senhas não correpondem");
-           } else mensagem(v, "Preencha todos os campos!");
+            if (verificaCampos()) {
+                if (comprarSenhas()) cadastrarUsuarioFirebase(v);
+                else mensagem(v, "As senhas não correpondem");
+            } else mensagem(v, "Preencha todos os campos!");
         });
     }
 
-    private void mensagem(View v, String mensagem){
+    private void mensagem(View v, String mensagem) {
         Snackbar snackbar = Snackbar.make(v, mensagem, Snackbar.LENGTH_LONG);
         snackbar.setBackgroundTint(Color.WHITE);
         snackbar.setTextColor(Color.BLACK);
@@ -124,11 +124,11 @@ public class FormCasdastro extends AppCompatActivity {
         return senha.equals(confirmarSenha);
     }
 
-    private void converteComponentesString(){
-       senha = etSenha.getText().toString();
-       email = etEmail.getText().toString();
-       confirmarSenha = etConfirmarSenha.getText().toString();
-       nome = etNome.getText().toString();
+    private void converteComponentesString() {
+        senha = etSenha.getText().toString();
+        email = etEmail.getText().toString();
+        confirmarSenha = etConfirmarSenha.getText().toString();
+        nome = etNome.getText().toString();
     }
 
 

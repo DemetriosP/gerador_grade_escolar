@@ -2,7 +2,6 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -13,15 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 public class FormDisciplina extends AppCompatActivity {
 
@@ -32,12 +25,11 @@ public class FormDisciplina extends AppCompatActivity {
     private TextInputLayout diaLayout, horaIniLayout, horaFinLayout;
     private Button btSalvar;
     private Disciplina disciplina;
-    final private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final DisciplinaDAO dao = new DisciplinaDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Cadastrar Disciplina");
         setContentView(R.layout.activity_form_disciplina);
         iniciarComponentes();
         preencheDrompDownMenu(situacoes, autoSituacao);
@@ -49,6 +41,8 @@ public class FormDisciplina extends AppCompatActivity {
 
     private void cadastrarDisciplina() {
 
+        Intent dados = getIntent();
+
         btSalvar.setOnClickListener(v -> {
 
             converteComponenteString();
@@ -56,50 +50,37 @@ public class FormDisciplina extends AppCompatActivity {
             if (nome == null || nome.isEmpty() || situacao == null || situacao.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
             } else if (situacao.equals("Concluído")) {
-                Toast.makeText(this, "Dados Salvos", Toast.LENGTH_LONG).show();
-                cadastrarDisciplinaCompleta();
+                if(dados.hasExtra("disciplina")){
+                    disciplina.setNome(nome);
+                    disciplina.setSituacao(situacao);
+                    disciplina.setDiaSemana(null);
+                    disciplina.setHorarioIn(null);
+                    disciplina.setHorarioFn(null);
+                    dao.alterar(disciplina);
+                }else {
+                    disciplina = new Disciplina(nome, situacao);
+                    dao.inserir(disciplina);
+                }
+                finish();
             } else if (situacao.equals("Pendente")) {
                 if (horaIni.isEmpty() || horaFim.isEmpty() || dia == null || dia.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Dados Salvos", Toast.LENGTH_LONG).show();
-                    cadastrarDisciplinaPendente();
+                    if(dados.hasExtra("disciplina")){
+                        disciplina.setNome(nome);
+                        disciplina.setSituacao(situacao);
+                        disciplina.setDiaSemana(dia);
+                        disciplina.setHorarioIn(horaIni);
+                        disciplina.setHorarioFn(horaFim);
+                        dao.alterar(disciplina);
+                    }else {
+                        disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
+                        dao.inserir(disciplina);
+                    }
+                    finish();
                 }
             }
         });
-    }
-
-    private void cadastrarDisciplinaPendente() {
-
-        Map<String, Object> disciplinas = new HashMap<>();
-        disciplinas.put("nome", nome);
-        disciplinas.put("situacao", situacao);
-        disciplinas.put("horaIni", horaIni);
-        disciplinas.put("horaFim", horaFim);
-
-        String usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-        DocumentReference referencia = db.collection("Disciplinas").document(usuarioID);
-
-        referencia.set(disciplinas).addOnSuccessListener(aVoid ->
-                Log.d("db", "Disciplina Salva")).addOnFailureListener
-                (e -> Log.d("db_error", "Erro ao salvar os dados" + e));
-    }
-
-    private void cadastrarDisciplinaCompleta() {
-
-        Map<String, Object> disciplinas = new HashMap<>();
-        disciplinas.put("nome", nome);
-        disciplinas.put("situacao", situacao);
-
-        String usuarioID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-
-        DocumentReference referencia = db.collection("Disciplinas").document(usuarioID);
-
-        referencia.set(disciplinas).addOnSuccessListener(aVoid ->
-                Log.d("db", "Disciplina Salva")).addOnFailureListener
-                (e -> Log.d("db_error", "Erro ao salvar os dados" + e));
-
     }
 
     private void configuraOnClinkDrop() {
@@ -127,7 +108,7 @@ public class FormDisciplina extends AppCompatActivity {
         menu.setThreshold(1);
     }
 
-    private void carregaDisciplina(){
+    private void carregaDisciplina() {
         Intent dados = getIntent();
         if (dados.hasExtra("disciplina")) {
             setTitle("Editar Disciplina");
@@ -143,7 +124,7 @@ public class FormDisciplina extends AppCompatActivity {
         etNome.setText(disciplina.getNome());
         autoSituacao.setText(disciplina.getSituacao(), false);
 
-        if(disciplina.getSituacao().equals(situacoes[1])){
+        if (disciplina.getSituacao().equals(situacoes[1])) {
             alteraVisbilidadeCampos(View.VISIBLE);
             autoDia.setText(disciplina.getDiaSemana(), false);
             etHoraIni.setText(String.valueOf(disciplina.getHorarioIn()));

@@ -1,7 +1,5 @@
 package com.example.geradordegradeescolar.model;
 
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +46,7 @@ public class Curso {
     }
 
     public void criarMapa(int semestres) {
-        for(int semestre = 1; semestre <= semestres; semestre++) {
+        for (int semestre = 1; semestre <= semestres; semestre++) {
             this.disciplinasPorSemestre.put(semestre, new ArrayList<>());
         }
     }

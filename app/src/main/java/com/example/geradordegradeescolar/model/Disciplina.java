@@ -2,6 +2,8 @@ package com.example.geradordegradeescolar.model;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,17 +11,18 @@ public class Disciplina implements Serializable {
 
     private String nome;
     private String diaSemana;
-    private int horarioIn;
-    private int horarioFn;
+    private String horarioIn;
+    private String horarioFn;
     private String situacao;
     private ArrayList<Disciplina> preRequisitos;
 
-    public Disciplina(String nome, String situacao){
+    public Disciplina(String nome, String situacao) {
         this.nome = nome;
         this.situacao = situacao;
     }
 
-    public Disciplina(String nome, String situacao, String diaSemana, int horarioIn, int horarioFn) {
+    public Disciplina(String nome, String situacao, String diaSemana, String horarioIn,
+                      String horarioFn) {
         this.nome = nome;
         this.situacao = situacao;
         this.diaSemana = diaSemana;
@@ -46,19 +49,19 @@ public class Disciplina implements Serializable {
         this.diaSemana = diaSemana;
     }
 
-    public int getHorarioIn() {
+    public String getHorarioIn() {
         return horarioIn;
     }
 
-    public void setHorarioIn(int horarioIn) {
+    public void setHorarioIn(String horarioIn) {
         this.horarioIn = horarioIn;
     }
 
-    public int getHorarioFn() {
+    public String getHorarioFn() {
         return horarioFn;
     }
 
-    public void setHorarioFn(int horarioFn) {
+    public void setHorarioFn(String horarioFn) {
         this.horarioFn = horarioFn;
     }
 
@@ -75,4 +78,5 @@ public class Disciplina implements Serializable {
     public String toString() {
         return nome + "\nSituação: " + situacao;
     }
+
 }

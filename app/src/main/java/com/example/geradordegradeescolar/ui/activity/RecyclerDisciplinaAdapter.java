@@ -12,25 +12,34 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisciplinaAdapter.MyViewHolder> {
 
-    ArrayList<Disciplina> disciplinas;
-    Context context;
+    private final List<Disciplina> disciplinass = new ArrayList<>();
+    private final Context context;
+    private ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
-    public RecyclerAdapter(Context contexto, ArrayList<Disciplina> d){
-        context = contexto;
-        disciplinas = d;
+    public RecyclerDisciplinaAdapter(Context contexto) {
+        this.context = contexto;
+        DisciplinaDAO dao = new DisciplinaDAO();
+        disciplinass.addAll(dao.todasDisciplinas());
+    }
+
+    public RecyclerDisciplinaAdapter(Context contexto, ArrayList<Disciplina> d){
+        this.context = contexto;
+        this.disciplinas = d;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View inflate = inflater.inflate(R.layout.recycler_row, parent, false);
+        View inflate = inflater.inflate(R.layout.item_disciplina, parent, false);
         return new MyViewHolder(inflate);
     }
 
@@ -50,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return disciplinas.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView disciplina;
         ConstraintLayout exibirDisciplina;
@@ -60,5 +69,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             disciplina = itemView.findViewById(R.id.textDisciplina);
             exibirDisciplina = itemView.findViewById(R.id.recyclerLayout);
         }
+    }
+
+    public void atualiza(List<Disciplina> disciplinas) {
+        this.disciplinas.clear();
+        this.disciplinas.addAll(disciplinas);
+        notifyDataSetChanged();
     }
 }

@@ -17,41 +17,23 @@ import java.util.ArrayList;
 
 public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
-    private final RecyclerDisciplinaView recyclerDisciplinaView =
-            new RecyclerDisciplinaView(this);
+    private RecyclerDisciplinaView recyclerDisciplinaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_disciplina);
         setTitle("Disciplinas" );
-
-        Conexao conexao = new Conexao(this);
-
-        DisciplinaDAO dao = new DisciplinaDAO(conexao.getConexao());
-
-        ArrayList<Disciplina> disciplinas = new ArrayList<>(dao.buscaTodos());
-
-        RecyclerView disciplinasRecycler = findViewById(R.id.disciplina_recycler);
-
-
-        RecyclerDisciplinaAdapter adapter = new RecyclerDisciplinaAdapter(this, disciplinas);
-        disciplinasRecycler.setAdapter(adapter);
-        disciplinasRecycler.setLayoutManager(new LinearLayoutManager(this));
-
+        recyclerDisciplinaView = new RecyclerDisciplinaView(this);
         configurarFabNovaDisciplina();
-
+        configuraRecycler();
     }
-
-    /*
 
     @Override
     protected void onResume() {
         super.onResume();
         recyclerDisciplinaView.atualizaDisciplinas();
     }
-
-     */
 
     private void configuraRecycler() {
         RecyclerView disciplinaRecycler = findViewById(R.id.disciplina_recycler);

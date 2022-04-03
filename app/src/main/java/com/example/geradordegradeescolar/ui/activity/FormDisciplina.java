@@ -33,50 +33,19 @@ public class FormDisciplina extends AppCompatActivity {
     private Disciplina disciplina;
     private DisciplinaDAO disciplinaDao;
 
-    private SQLiteDatabase conexao;
-    private DaoOpenHelper daoOpenHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_disciplina);
-        conexao();
-        //Conexao conexao = new Conexao(this);
-        //disciplinaDao = new DisciplinaDAO(conexao.getConexao());
+        Conexao conexao = new Conexao(this);
+        disciplinaDao = new DisciplinaDAO(conexao.getConexao());
         iniciarComponentes();
         preencheDrompDownMenu(situacoes, autoSituacao);
         preencheDrompDownMenu(dias, autoDia);
         configuraOnClinkDrop();
         cadastrarDisciplina();
         carregaDisciplina();
-
-
-        //DisciplinaDAO disciplinaDao = new DisciplinaDAO(conexao);
-
     }
-
-
-
-    public void conexao(){
-
-        try {
-            this.daoOpenHelper = new DaoOpenHelper(this);
-            this.conexao = daoOpenHelper.getWritableDatabase();
-            Toast.makeText(this, "Conexão criada com sucesso", Toast.LENGTH_SHORT).show();
-
-            disciplinaDao = new DisciplinaDAO(conexao);
-
-        } catch (SQLException ex){
-
-            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-            dlg.setTitle("Erro");
-            dlg.setMessage(ex.getMessage());
-            dlg.setNeutralButton("OK", null);
-            dlg.show();
-
-        }
-    }
-
 
 
     private void cadastrarDisciplina() {
@@ -97,6 +66,7 @@ public class FormDisciplina extends AppCompatActivity {
                     disciplina.setHorarioIn(null);
                     disciplina.setHorarioFn(null);
                     disciplinaDao.alterar(disciplina);
+                    Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
                 }else {
                     disciplina = new Disciplina(nome, situacao);
                     disciplinaDao.inserir(disciplina);
@@ -114,6 +84,7 @@ public class FormDisciplina extends AppCompatActivity {
                         disciplina.setHorarioIn(horaIni);
                         disciplina.setHorarioFn(horaFim);
                         disciplinaDao.alterar(disciplina);
+                        Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
                     }else {
                         disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
                         disciplinaDao.inserir(disciplina);

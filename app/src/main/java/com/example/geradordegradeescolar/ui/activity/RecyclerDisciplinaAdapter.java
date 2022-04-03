@@ -20,15 +20,10 @@ import java.util.List;
 
 public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisciplinaAdapter.MyViewHolder> {
 
-    private final List<Disciplina> disciplinass = new ArrayList<>();
     private final Context context;
-    private ArrayList<Disciplina> disciplinas = new ArrayList<>();
+    private final List<Disciplina> disciplinas;
 
-    public RecyclerDisciplinaAdapter(Context contexto) {
-        this.context = contexto;
-    }
-
-    public RecyclerDisciplinaAdapter(Context contexto, ArrayList<Disciplina> d) {
+    public RecyclerDisciplinaAdapter(Context contexto, List<Disciplina> d) {
         this.context = contexto;
         this.disciplinas = d;
     }
@@ -67,6 +62,11 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
             disciplina = itemView.findViewById(R.id.textDisciplina);
             exibirDisciplina = itemView.findViewById(R.id.recyclerLayout);
         }
+    }
+
+    public void remove(Disciplina disciplina){
+        disciplinas.remove(disciplina);
+        notifyDataSetChanged();
     }
 
     public void atualiza(List<Disciplina> disciplinas) {

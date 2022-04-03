@@ -38,7 +38,7 @@ public class DisciplinaDAO {
         contentValues.put("SITUACAO", disciplina.getSituacao());
         contentValues.put("DIA_SEMANA", disciplina.getDiaSemana());
         contentValues.put("HORARIO_IN", disciplina.getHorarioIn());
-        contentValues.put("HORARIO_FN", disciplina.getNome());
+        contentValues.put("HORARIO_FN", disciplina.getHorarioFn());
 
         conexao.update("DISCIPLINA", contentValues, "NOME = ?", new String[]{disciplina.getNome()});
 

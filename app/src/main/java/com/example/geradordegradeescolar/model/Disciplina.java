@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Disciplina implements Serializable {
 
@@ -12,7 +13,7 @@ public class Disciplina implements Serializable {
     private String horarioIn;
     private String horarioFn;
     private String situacao;
-    private ArrayList<Disciplina> preRequisitos;
+    private List<Disciplina> requisitos;
 
     public Disciplina(String nome, String situacao) {
         this.nome = nome;
@@ -69,6 +70,18 @@ public class Disciplina implements Serializable {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public List<Disciplina> getRequisitos() {
+        return requisitos;
+    }
+
+    public void setRequisitos(List<Disciplina> requisitos) {
+        this.requisitos = requisitos;
+    }
+
+    public void adicionaRequisito(Disciplina requisito){
+        this.requisitos.add(requisito);
     }
 
     @NonNull

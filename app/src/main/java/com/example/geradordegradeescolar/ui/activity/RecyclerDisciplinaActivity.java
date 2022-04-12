@@ -2,18 +2,14 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
-import com.example.geradordegradeescolar.dao.Conexao;
-import com.example.geradordegradeescolar.dao.DisciplinaDAO;
-import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 
 public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
@@ -35,19 +31,40 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
         recyclerDisciplinaView.atualizaDisciplinas();
     }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case 1:
+                Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerRequisitoActivity.class);
+                intent.putExtra("disciplina", recyclerDisciplinaView.buscaDisciplina(item.getGroupId()));
+                startActivity(intent);
+                return true;
+            case 2:
+                intent = new Intent(RecyclerDisciplinaActivity.this, FormDisciplina.class);
+                intent.putExtra("disciplina", recyclerDisciplinaView.buscaDisciplina(item.getGroupId()));
+                startActivity(intent);
+                return true;
+            case 3:
+                recyclerDisciplinaView.confirmaRemocao(item);
+            return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
     private void configuraRecycler() {
-        RecyclerView disciplinaRecycler = findViewById(R.id.disciplina_recycler);
+        RecyclerView disciplinaRecycler = findViewById(R.id.recyclerDisciplina);
         recyclerDisciplinaView.configuraAdapter(disciplinaRecycler);
     }
 
     private void configurarFabNovaDisciplina() {
-        FloatingActionButton botaoNovoAluno =
-                findViewById(R.id.novaDisciplina);
+        FloatingActionButton botaoNovoAluno = findViewById(R.id.novaDisciplina);
         abrirFormularioCadastrarDisciplina(botaoNovoAluno);
     }
 
-    private void abrirFormularioCadastrarDisciplina(FloatingActionButton botaoNovoAluno) {
-        botaoNovoAluno.setOnClickListener(view -> startActivity(new
+    private void abrirFormularioCadastrarDisciplina(FloatingActionButton botaoNovaDisciplina) {
+        botaoNovaDisciplina.setOnClickListener(view -> startActivity(new
                 Intent(RecyclerDisciplinaActivity.this, FormDisciplina.class)));
     }
 

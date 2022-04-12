@@ -2,11 +2,8 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,48 +11,60 @@ import com.example.geradordegradeescolar.dao.Conexao;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 
-public class RecyclerDisciplinaView {
+import java.util.List;
+
+public class RecyclerRequisitoView {
 
     private Context contexto;
-    private RecyclerDisciplinaAdapter adapter;
+    private RecyclerRequisitoAdapter adapter;
     private DisciplinaDAO disciplinaDAO;
     private Conexao conexao;
 
-    public RecyclerDisciplinaView(Context contexto) {
+    public RecyclerRequisitoView(Context contexto, List<Disciplina> requisitos){
         this.contexto = contexto;
         this.conexao = new Conexao(contexto);
         this.disciplinaDAO = new DisciplinaDAO(conexao.getConexao());
-        this.adapter = new RecyclerDisciplinaAdapter(this.contexto, this.disciplinaDAO.buscaTodos());
+        this.adapter = new RecyclerRequisitoAdapter(this.contexto, requisitos);
     }
 
-    public void atualizaDisciplinas() {
+    /*
+    public void atualizaRequisito() {
         adapter.atualiza(disciplinaDAO.buscaTodos());
     }
+     */
 
-    public void configuraAdapter(RecyclerView disciplinaRecycler) {
-        disciplinaRecycler.setAdapter(adapter);
-        disciplinaRecycler.setLayoutManager(new LinearLayoutManager(this.contexto));
+    public void configuraAdapter(RecyclerView requisitoRecycler) {
+        requisitoRecycler.setAdapter(adapter);
+        requisitoRecycler.setLayoutManager(new LinearLayoutManager(this.contexto));
     }
+
+    /*
 
     public void confirmaRemocao(MenuItem item) {
         new AlertDialog.Builder(contexto)
-                .setTitle("Remover disciplina")
-                .setMessage("Tem certeza que quer remover a disciplina?")
+                .setTitle("Remover requisito")
+                .setMessage("Tem certeza que quer remover o requisito?")
                 .setPositiveButton("Sim", (dialogInterface, i) -> {
-                    Disciplina disciplinaEscolhida = adapter.getItem(item.getGroupId());
-                    removeDisciplina(disciplinaEscolhida);
+                    Disciplina requisitoEscolhida = adapter.getItem(item.getGroupId());
+                    removeRequisito(requisitoEscolhida);
                 })
                 .setNegativeButton("Não", null)
                 .show();
     }
 
-    public void removeDisciplina(Disciplina disciplina){
-        disciplinaDAO.excluir(disciplina);
-        adapter.remove(disciplina);
+     */
+
+    /*
+    public void removeRequisito(Disciplina requisito){
+        disciplinaDAO.excluirRequisito(requisito);
+        adapter.remove(requisito);
     }
 
-    public Disciplina buscaDisciplina(int posicao){
+     */
+
+    public Disciplina buscaRequisito(int posicao){
         return adapter.getItem(posicao);
     }
+
 
 }

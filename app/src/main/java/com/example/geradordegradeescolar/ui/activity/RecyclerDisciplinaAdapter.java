@@ -1,21 +1,20 @@
 package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Context;
-import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
-import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisciplinaAdapter.MyViewHolder> {
@@ -39,12 +38,6 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.disciplina.setText(disciplinas.get(position).toString());
-
-        holder.exibirDisciplina.setOnClickListener(v -> {
-            Intent intent = new Intent(context, FormDisciplina.class);
-            intent.putExtra("disciplina", disciplinas.get(position));
-            context.startActivity(intent);
-        });
     }
 
     @Override
@@ -52,19 +45,35 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
         return disciplinas.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public Disciplina getItem(int position) {
+        return disciplinas.get(position);
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         TextView disciplina;
         ConstraintLayout exibirDisciplina;
+        CardView cardDisciplina;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             disciplina = itemView.findViewById(R.id.textDisciplina);
-            exibirDisciplina = itemView.findViewById(R.id.recyclerLayout);
+            exibirDisciplina = itemView.findViewById(R.id.recyclerLayoutDisciplina);
+            cardDisciplina = itemView.findViewById(R.id.cardDisciplina);
+            cardDisciplina.setOnCreateContextMenuListener(this);
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(this.getAdapterPosition(), 1, 0, "Requisitos");
+            menu.add(this.getAdapterPosition(), 2, 1, "Editar");
+            menu.add(this.getAdapterPosition(), 3, 2, "Remover");
+        }
+
     }
 
-    public void remove(Disciplina disciplina){
+
+    public void remove(Disciplina disciplina) {
         disciplinas.remove(disciplina);
         notifyDataSetChanged();
     }

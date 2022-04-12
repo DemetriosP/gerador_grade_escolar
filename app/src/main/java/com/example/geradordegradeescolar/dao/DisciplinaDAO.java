@@ -76,6 +76,8 @@ public class DisciplinaDAO {
                 disciplina.setHorarioIn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_IN")));
                 disciplina.setHorarioFn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_FN")));
 
+                disciplina.setRequisitos(new ArrayList<>());
+
                 disciplinas.add(disciplina);
 
             }while(resultado.moveToNext());

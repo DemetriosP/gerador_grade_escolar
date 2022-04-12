@@ -13,7 +13,7 @@
             android:name=".ui.activity.FormLogin"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.FormPreRequisito"
+            android:name=".ui.activity.RecyclerRequisitoActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.FormDisciplina"

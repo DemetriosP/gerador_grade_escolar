@@ -80,10 +80,6 @@ public class Disciplina implements Serializable {
         this.requisitos = requisitos;
     }
 
-    public void adicionaRequisito(Disciplina requisito){
-        this.requisitos.add(requisito);
-    }
-
     @NonNull
     @Override
     public String toString() {

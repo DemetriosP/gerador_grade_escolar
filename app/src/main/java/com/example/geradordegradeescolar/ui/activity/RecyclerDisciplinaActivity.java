@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
+import com.example.geradordegradeescolar.ui.view.RecyclerDisciplinaView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RecyclerDisciplinaActivity extends AppCompatActivity {

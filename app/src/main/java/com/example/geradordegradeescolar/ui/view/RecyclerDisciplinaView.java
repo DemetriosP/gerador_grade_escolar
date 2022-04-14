@@ -1,18 +1,16 @@
-package com.example.geradordegradeescolar.ui.activity;
+package com.example.geradordegradeescolar.ui.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.dao.Conexao;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
+import com.example.geradordegradeescolar.ui.adapter.RecyclerDisciplinaAdapter;
 
 public class RecyclerDisciplinaView {
 

@@ -3,7 +3,6 @@ package com.example.geradordegradeescolar.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
 import com.example.geradordegradeescolar.model.Disciplina;
+import com.example.geradordegradeescolar.ui.view.RecyclerRequisitoView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -33,7 +33,14 @@ public class RecyclerRequisitoActivity extends AppCompatActivity {
         configuraFabAcrescentaRequisito();
         configuraRecycler();
     }
-    /*
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent dados = getIntent();
+        Disciplina disciplina = (Disciplina) dados.getSerializableExtra("disciplina");
+        recyclerRequisitoView.atualizaRequisito(disciplina);
+    }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -44,7 +51,6 @@ public class RecyclerRequisitoActivity extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
-     */
 
     private void configuraRecycler() {
         RecyclerView disciplinaRecycler = findViewById(R.id.recyclerRequisito);
@@ -57,8 +63,10 @@ public class RecyclerRequisitoActivity extends AppCompatActivity {
     }
 
     private void abreAcrescentarDisciplina(FloatingActionButton botaoAcrescentaRequisito) {
-        botaoAcrescentaRequisito.setOnClickListener(v -> startActivity(new Intent(
-                RecyclerRequisitoActivity.this, AcrescentaRequisito.class)));
+        Intent dados = getIntent();
+        Intent intent = new Intent(RecyclerRequisitoActivity.this, AcrescentaRequisitoActivity.class);
+        intent.putExtra("disciplina", (Disciplina) dados.getSerializableExtra("disciplina"));
+        botaoAcrescentaRequisito.setOnClickListener(v -> startActivity(intent));
     }
 
 

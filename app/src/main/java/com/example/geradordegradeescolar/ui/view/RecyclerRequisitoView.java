@@ -1,15 +1,16 @@
-package com.example.geradordegradeescolar.ui.activity;
+package com.example.geradordegradeescolar.ui.view;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.dao.Conexao;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
+import com.example.geradordegradeescolar.ui.adapter.RecyclerRequisitoAdapter;
 
 import java.util.List;
 
@@ -27,18 +28,14 @@ public class RecyclerRequisitoView {
         this.adapter = new RecyclerRequisitoAdapter(this.contexto, requisitos);
     }
 
-    /*
-    public void atualizaRequisito() {
-        adapter.atualiza(disciplinaDAO.buscaTodos());
+    public void atualizaRequisito(Disciplina disciplina) {
+        adapter.atualiza(disciplinaDAO.buscaRequisitoDisciplina(disciplina.getNome()));
     }
-     */
 
     public void configuraAdapter(RecyclerView requisitoRecycler) {
         requisitoRecycler.setAdapter(adapter);
         requisitoRecycler.setLayoutManager(new LinearLayoutManager(this.contexto));
     }
-
-    /*
 
     public void confirmaRemocao(MenuItem item) {
         new AlertDialog.Builder(contexto)
@@ -52,19 +49,9 @@ public class RecyclerRequisitoView {
                 .show();
     }
 
-     */
-
-    /*
     public void removeRequisito(Disciplina requisito){
         disciplinaDAO.excluirRequisito(requisito);
         adapter.remove(requisito);
     }
-
-     */
-
-    public Disciplina buscaRequisito(int posicao){
-        return adapter.getItem(posicao);
-    }
-
 
 }

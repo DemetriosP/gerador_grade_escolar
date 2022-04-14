@@ -22,6 +22,9 @@
     <string name="requisitos">Requisitos</string>
     <string name="acrescentar_requisito">Acrescentar Requisito</string>
     <string name="requisito">Requisito</string>
+    <string name="selecionar_requisitos">Selecionar Requisitos</string>
+    <string name="acrescenta_requisito">Acrescenta Requisito</string>
+    <string name="confirma_requisito">Confirma Requisito</string>
 
     <string-array name="situacao">
         <item>Concluído</item>

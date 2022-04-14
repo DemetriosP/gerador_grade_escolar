@@ -1,4 +1,4 @@
-package com.example.geradordegradeescolar.ui.activity;
+package com.example.geradordegradeescolar.ui.adapter;
 
 import android.content.Context;
 import android.view.ContextMenu;

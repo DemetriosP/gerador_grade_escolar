@@ -10,7 +10,7 @@ public class DaoOpenHelper extends SQLiteOpenHelper {
 
 
     public DaoOpenHelper(@Nullable Context context) {
-        super(context, "DADOS", null, 1);
+        super(context, "TESTE", null, 1);
     }
 
     @Override

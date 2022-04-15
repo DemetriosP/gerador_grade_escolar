@@ -11,4 +11,6 @@
     <color name="soft_gray">#DFDFE6</color>
     <color name="red">#FF0000</color>
     <color name="gray">#A5A5A5</color>
+    <color name="darkGray">#333533</color>
+    <color name="lightGray">#EEE</color>
 </resources>

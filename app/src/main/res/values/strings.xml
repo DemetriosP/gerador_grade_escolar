@@ -25,10 +25,13 @@
     <string name="selecionar_requisitos">Selecionar Requisitos</string>
     <string name="acrescenta_requisito">Acrescenta Requisito</string>
     <string name="confirma_requisito">Confirma Requisito</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="adicionar">Adicionar</string>
 
     <string-array name="situacao">
         <item>Concluído</item>
         <item>Pendente</item>
+        <item>Disponível</item>
     </string-array>
 
     <string-array name="dia">

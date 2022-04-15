@@ -2,10 +2,12 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
@@ -50,7 +52,6 @@ public class RecyclerRequisitoActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
 
     private void configuraRecycler() {
         RecyclerView disciplinaRecycler = findViewById(R.id.recyclerRequisito);

@@ -15,9 +15,9 @@ public class ScriptDLL {
         return "CREATE TABLE IF NOT EXISTS DISCIPLINA( " +
                 "   NOME VARCHAR (250) NOT NULL PRIMARY KEY, " +
                 "   SITUACAO VARCHAR (250) NOT NULL, " +
-                "   DIA_SEMANA VARCHAR (250) NOT NULL, " +
-                "   HORARIO_IN VARCHAR (250) NOT NULL, " +
-                "   HORARIO_FN VARCHAR (250) NOT NULL )";
+                "   DIA_SEMANA VARCHAR (250), " +
+                "   HORARIO_IN VARCHAR (250), " +
+                "   HORARIO_FN VARCHAR (250) )";
 
     }
 
@@ -31,6 +31,7 @@ public class ScriptDLL {
                 "PRIMARY KEY (DISCIPLINA_NOME, DISCIPLINA_NOME_REQUISITO) )";
 
     }
+
 
 
 }

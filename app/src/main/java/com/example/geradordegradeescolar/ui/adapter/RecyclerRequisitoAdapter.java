@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.geradordegradeescolar.R;
 import com.example.geradordegradeescolar.model.Disciplina;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class RecyclerRequisitoAdapter extends RecyclerView.Adapter<RecyclerRequisitoAdapter.MyViewHolder> {
@@ -37,6 +38,7 @@ public class RecyclerRequisitoAdapter extends RecyclerView.Adapter<RecyclerRequi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        requisitos.sort(Comparator.comparing(Disciplina::getNome));
         holder.requisito.setText(requisitos.get(position).getNome());
     }
 
@@ -45,11 +47,11 @@ public class RecyclerRequisitoAdapter extends RecyclerView.Adapter<RecyclerRequi
         return requisitos.size();
     }
 
-    public Disciplina getItem(int position){
+    public Disciplina getItem(int position) {
         return requisitos.get(position);
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         TextView requisito;
         ConstraintLayout exibirRequisito;

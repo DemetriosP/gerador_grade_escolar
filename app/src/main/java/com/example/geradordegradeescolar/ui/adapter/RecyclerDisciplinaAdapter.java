@@ -5,6 +5,8 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,16 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.geradordegradeescolar.R;
 import com.example.geradordegradeescolar.model.Disciplina;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisciplinaAdapter.MyViewHolder> {
+public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisciplinaAdapter.MyViewHolder> implements Filterable {
 
     private final Context context;
     private final List<Disciplina> disciplinas;
+    private final List<Disciplina> disciplinasPesquisa;
 
     public RecyclerDisciplinaAdapter(Context contexto, List<Disciplina> d) {
         this.context = contexto;
         this.disciplinas = d;
+        this.disciplinasPesquisa = new ArrayList<>(disciplinas);
     }
 
     @NonNull
@@ -37,6 +43,7 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        disciplinas.sort(Comparator.comparing(Disciplina::getNome));
         holder.disciplina.setText(disciplinas.get(position).toString());
     }
 
@@ -48,6 +55,43 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
     public Disciplina getItem(int position) {
         return disciplinas.get(position);
     }
+
+    @Override
+    public Filter getFilter() {
+        return disciplinasFiltro;
+    }
+
+    public Filter disciplinasFiltro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Disciplina> disciplinasFiltradas = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                disciplinasFiltradas.addAll(disciplinasPesquisa);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Disciplina disciplina : disciplinasPesquisa) {
+
+                    if (disciplina.getNome().toLowerCase().contains(filterPattern)) {
+                        disciplinasFiltradas.add(disciplina);
+                    }
+                }
+            }
+
+            FilterResults resultados = new FilterResults();
+            resultados.values = disciplinasFiltradas;
+
+            return resultados;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            disciplinas.clear();
+            disciplinas.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 

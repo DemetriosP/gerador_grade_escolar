@@ -22,6 +22,7 @@ public class AcrescentaRequisitoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acrescenta_requisito);
+        setTitle("Acrescentar Requisitos");
 
         Intent dados = getIntent();
         Disciplina disciplina = (Disciplina) dados.getSerializableExtra("disciplina");
@@ -33,7 +34,6 @@ public class AcrescentaRequisitoActivity extends AppCompatActivity {
         acrescentaRequisitoView = new AcrescentaRequisitoView(this, requisitos);
         configuraRecycler();
         configuraFabConfirmaRequisito(disciplina);
-
     }
 
     private void configuraRecycler() {

@@ -26,7 +26,7 @@ public class AcrescentaRequisitoView {
     }
 
     public List<Disciplina> requisitosValidos(List<Disciplina> requisitos) {
-        requisitos.addAll(disciplinaDAO.ERequisito(requisitos.get(0).getNome()));
+        requisitos.addAll(disciplinaDAO.buscaOndeERequisito(requisitos.get(0).getNome()));
         List<Disciplina> todosRequisitos = disciplinaDAO.buscaTodos();
 
         for (int posicaoRequisitos = 0; posicaoRequisitos < requisitos.size(); posicaoRequisitos++) {

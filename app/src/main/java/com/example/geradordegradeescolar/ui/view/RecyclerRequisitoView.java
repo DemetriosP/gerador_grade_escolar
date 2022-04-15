@@ -16,14 +16,13 @@ import java.util.List;
 
 public class RecyclerRequisitoView {
 
-    private Context contexto;
-    private RecyclerRequisitoAdapter adapter;
-    private DisciplinaDAO disciplinaDAO;
-    private Conexao conexao;
+    private final Context contexto;
+    private final RecyclerRequisitoAdapter adapter;
+    private final DisciplinaDAO disciplinaDAO;
 
-    public RecyclerRequisitoView(Context contexto, List<Disciplina> requisitos){
+    public RecyclerRequisitoView(Context contexto, List<Disciplina> requisitos) {
         this.contexto = contexto;
-        this.conexao = new Conexao(contexto);
+        Conexao conexao = new Conexao(contexto);
         this.disciplinaDAO = new DisciplinaDAO(conexao.getConexao());
         this.adapter = new RecyclerRequisitoAdapter(this.contexto, requisitos);
     }
@@ -49,9 +48,13 @@ public class RecyclerRequisitoView {
                 .show();
     }
 
-    public void removeRequisito(Disciplina requisito){
+    public void removeRequisito(Disciplina requisito) {
         disciplinaDAO.excluirRequisito(requisito);
         adapter.remove(requisito);
+    }
+
+    public RecyclerRequisitoAdapter getAdapter() {
+        return adapter;
     }
 
 }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.geradordegradeescolar.model.Disciplina;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DisciplinaDAO {
@@ -30,6 +32,7 @@ public class DisciplinaDAO {
 
     }
 
+
     public void alterar(Disciplina disciplina) {
 
         ContentValues contentValues = new ContentValues();
@@ -42,13 +45,15 @@ public class DisciplinaDAO {
 
     }
 
-    public void excluir(Disciplina disciplina) {
+    public void excluiDisciplina(Disciplina disciplina) {
 
         String[] parametros = new String[1];
         parametros[0] = disciplina.getNome();
 
-        conexao.delete("DISCIPLINA", "NOME = ?", parametros);
+        if (temRequisito(disciplina.getNome())) conexao.delete("PRE_REQUISITO",
+                "DISCIPLINA_NOME = ?", parametros);
 
+        conexao.delete("DISCIPLINA", "NOME = ?", parametros);
     }
 
     public List<Disciplina> buscaTodos() {
@@ -165,12 +170,11 @@ public class DisciplinaDAO {
         ContentValues contentValues = new ContentValues();
 
         for (Disciplina requisito : requisitos) {
-
             contentValues.put("DISCIPLINA_NOME", disciplina.getNome());
             contentValues.put("DISCIPLINA_NOME_REQUISITO", requisito.getNome());
+            conexao.insertOrThrow("PRE_REQUISITO", null, contentValues);
         }
 
-        conexao.insertOrThrow("PRE_REQUISITO", null, contentValues);
     }
 
     public void excluirRequisito(Disciplina requisito) {
@@ -182,7 +186,17 @@ public class DisciplinaDAO {
 
     }
 
-    public List<Disciplina> ERequisito(String nomeDisciplina) {
+    public boolean eRequisito(Disciplina disciplina) {
+
+        String sql = "SELECT * FROM PRE_REQUISITO\n" +
+                "WHERE DISCIPLINA_NOME_REQUISITO = '" + disciplina.getNome() + "'";
+
+        Cursor resultado = conexao.rawQuery(sql, null);
+
+        return resultado.getCount() > 0;
+    }
+
+    public List<Disciplina> buscaOndeERequisito(String nomeDisciplina) {
 
         List<Disciplina> disciplinaRequisito = new ArrayList<>();
 
@@ -208,6 +222,17 @@ public class DisciplinaDAO {
 
         resultado.close();
         return disciplinaRequisito;
+
+    }
+
+    public boolean temCadastro(String nomeDisciplina){
+
+        String sql = "SELECT * FROM DISCIPLINA\n" +
+                "WHERE NOME = '" + nomeDisciplina + "'";
+
+        Cursor resultado = conexao.rawQuery(sql, null);
+
+        return resultado.getCount() > 0;
 
     }
 }

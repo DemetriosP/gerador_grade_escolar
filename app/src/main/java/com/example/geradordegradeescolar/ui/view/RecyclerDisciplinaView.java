@@ -14,14 +14,13 @@ import com.example.geradordegradeescolar.ui.adapter.RecyclerDisciplinaAdapter;
 
 public class RecyclerDisciplinaView {
 
-    private Context contexto;
-    private RecyclerDisciplinaAdapter adapter;
-    private DisciplinaDAO disciplinaDAO;
-    private Conexao conexao;
+    private final Context contexto;
+    private final RecyclerDisciplinaAdapter adapter;
+    private final DisciplinaDAO disciplinaDAO;
 
     public RecyclerDisciplinaView(Context contexto) {
         this.contexto = contexto;
-        this.conexao = new Conexao(contexto);
+        Conexao conexao = new Conexao(contexto);
         this.disciplinaDAO = new DisciplinaDAO(conexao.getConexao());
         this.adapter = new RecyclerDisciplinaAdapter(this.contexto, this.disciplinaDAO.buscaTodos());
     }
@@ -47,13 +46,29 @@ public class RecyclerDisciplinaView {
                 .show();
     }
 
-    public void removeDisciplina(Disciplina disciplina){
-        disciplinaDAO.excluir(disciplina);
+    public void removeDisciplina(Disciplina disciplina) {
+        disciplinaDAO.excluiDisciplina(disciplina);
         adapter.remove(disciplina);
     }
 
-    public Disciplina buscaDisciplina(int posicao){
+    public Disciplina buscaDisciplina(int posicao) {
         return adapter.getItem(posicao);
+    }
+
+    public void alertaNaoPodeRemover() {
+        new AlertDialog.Builder(contexto)
+                .setTitle("Ação negada")
+                .setMessage("Disciplina não pode ser removida, ela é pré-requisito de outra disciplina.")
+                .setNeutralButton("Ok", null)
+                .show();
+    }
+
+    public boolean eRequisito(Disciplina disciplina) {
+        return disciplinaDAO.eRequisito(disciplina);
+    }
+
+    public RecyclerDisciplinaAdapter getAdapter() {
+        return adapter;
     }
 
 }

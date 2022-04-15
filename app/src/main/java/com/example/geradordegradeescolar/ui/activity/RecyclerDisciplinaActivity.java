@@ -2,10 +2,12 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
@@ -20,7 +22,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_disciplina);
-        setTitle("Disciplinas" );
+        setTitle("Disciplinas");
         recyclerDisciplinaView = new RecyclerDisciplinaView(this);
         configurarFabNovaDisciplina();
         configuraRecycler();
@@ -35,7 +37,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case 1:
                 Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerRequisitoActivity.class);
                 intent.putExtra("disciplina", recyclerDisciplinaView.buscaDisciplina(item.getGroupId()));
@@ -47,11 +49,38 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case 3:
-                recyclerDisciplinaView.confirmaRemocao(item);
-            return true;
+                if (recyclerDisciplinaView.eRequisito(recyclerDisciplinaView.buscaDisciplina(item.getGroupId()))) {
+                    recyclerDisciplinaView.alertaNaoPodeRemover();
+                } else recyclerDisciplinaView.confirmaRemocao(item);
+
+
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                recyclerDisciplinaView.getAdapter().getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return true;
     }
 
     private void configuraRecycler() {

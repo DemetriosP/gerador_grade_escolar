@@ -1,5 +1,6 @@
 package com.example.geradordegradeescolar.ui.activity;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +23,8 @@ import com.example.geradordegradeescolar.dao.DaoOpenHelper;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Locale;
 
 public class FormDisciplina extends AppCompatActivity {
 
@@ -47,7 +51,6 @@ public class FormDisciplina extends AppCompatActivity {
         carregaDisciplina();
     }
 
-
     private void cadastrarDisciplina() {
 
         Intent dados = getIntent();
@@ -58,39 +61,43 @@ public class FormDisciplina extends AppCompatActivity {
 
             if (nome == null || nome.isEmpty() || situacao == null || situacao.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-            } else if (situacao.equals("Concluído")) {
-                if(dados.hasExtra("disciplina")){
-                    disciplina.setNome(nome);
-                    disciplina.setSituacao(situacao);
-                    disciplina.setDiaSemana(null);
-                    disciplina.setHorarioIn(null);
-                    disciplina.setHorarioFn(null);
-                    disciplinaDao.alterar(disciplina);
-                    Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
+            } else if (situacao.equals("Concluído") || situacao.equals("Pendente")) {
+                if(disciplinaDao.temCadastro(nome)){
+                    Toast.makeText(this, "Disciplina já foi cadastrada", Toast.LENGTH_SHORT).show();
                 }else {
-                    disciplina = new Disciplina(nome, situacao);
-                    disciplinaDao.inserir(disciplina);
-                    Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
+                    if (dados.hasExtra("disciplina")) {
+                        disciplina.setNome(nome);
+                        disciplina.setSituacao(situacao);
+                        disciplina.setDiaSemana(null);
+                        disciplina.setHorarioIn(null);
+                        disciplina.setHorarioFn(null);
+                        disciplinaDao.alterar(disciplina);
+                    } else {
+                        disciplina = new Disciplina(nome, situacao);
+                        disciplinaDao.inserir(disciplina);
+                    }
+                    finish();
                 }
-                finish();
-            } else if (situacao.equals("Pendente")) {
+            } else if (situacao.equals("Disponível")) {
                 if (horaIni.isEmpty() || horaFim.isEmpty() || dia == null || dia.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(dados.hasExtra("disciplina")){
-                        disciplina.setNome(nome);
-                        disciplina.setSituacao(situacao);
-                        disciplina.setDiaSemana(dia);
-                        disciplina.setHorarioIn(horaIni);
-                        disciplina.setHorarioFn(horaFim);
-                        disciplinaDao.alterar(disciplina);
-                        Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
+                    if(disciplinaDao.temCadastro(nome)){
+                        Toast.makeText(this, "Disciplina já foi cadastrada", Toast.LENGTH_SHORT).show();
                     }else {
-                        disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
-                        disciplinaDao.inserir(disciplina);
-                        Toast.makeText(this, "DADOS SALVOS", Toast.LENGTH_LONG).show();
+                        if (dados.hasExtra("disciplina")) {
+                            disciplina.setNome(nome);
+                            disciplina.setSituacao(situacao);
+                            disciplina.setDiaSemana(dia);
+                            disciplina.setHorarioIn(horaIni);
+                            disciplina.setHorarioFn(horaFim);
+                            disciplinaDao.alterar(disciplina);
+                        } else {
+                            disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
+                            disciplinaDao.inserir(disciplina);
+                        }
+                        finish();
                     }
-                    finish();
                 }
             }
         });
@@ -99,10 +106,10 @@ public class FormDisciplina extends AppCompatActivity {
     private void configuraOnClinkDrop() {
         autoSituacao.setOnItemClickListener((parent, view, position, id) -> {
             String x = (String) parent.getItemAtPosition(position);
-            if (x.equals(situacoes[1])) {
+            if (x.equals(situacoes[2])) {
                 alteraVisbilidadeCampos(View.VISIBLE);
             } else {
-                alteraVisbilidadeCampos(View.INVISIBLE);
+                alteraVisbilidadeCampos(View.GONE);
             }
         });
     }
@@ -137,7 +144,7 @@ public class FormDisciplina extends AppCompatActivity {
         etNome.setText(disciplina.getNome());
         autoSituacao.setText(disciplina.getSituacao(), false);
 
-        if (disciplina.getSituacao().equals(situacoes[1])) {
+        if (disciplina.getSituacao().equals(situacoes[2])) {
             alteraVisbilidadeCampos(View.VISIBLE);
             autoDia.setText(disciplina.getDiaSemana(), false);
             etHoraIni.setText(String.valueOf(disciplina.getHorarioIn()));

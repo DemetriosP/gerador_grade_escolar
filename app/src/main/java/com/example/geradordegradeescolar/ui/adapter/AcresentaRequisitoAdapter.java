@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,18 +18,21 @@ import com.example.geradordegradeescolar.R;
 import com.example.geradordegradeescolar.model.Disciplina;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaRequisitoAdapter.MyViewHolder> {
+public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaRequisitoAdapter.MyViewHolder> implements Filterable {
 
     private final Context contexto;
     private final List<Disciplina> requisitos;
+    private final List<Disciplina> requisitosPesquisa;
     private final List<Disciplina> requisitosSelecionados = new ArrayList<>();
     boolean isSelectMode = false;
 
     public AcresentaRequisitoAdapter(Context contexto, List<Disciplina> requisitos) {
         this.contexto = contexto;
         this.requisitos = requisitos;
+        this.requisitosPesquisa = new ArrayList<>(requisitos);
     }
 
     @NonNull
@@ -40,9 +45,11 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        requisitos.sort(Comparator.comparing(Disciplina::getNome));
         holder.requisito.setText(requisitos.get(position).getNome());
 
         holder.cardRequisito.setOnLongClickListener(v -> {
+
             isSelectMode = true;
             if (requisitosSelecionados.contains(requisitos.get(position))) {
                 v.setBackgroundColor(Color.TRANSPARENT);
@@ -76,6 +83,44 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
         return requisitos.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return requisitosFiltro;
+    }
+
+    public Filter requisitosFiltro = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Disciplina> requisitosFiltrados = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                requisitosFiltrados.addAll(requisitosPesquisa);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Disciplina requisito : requisitosPesquisa) {
+
+                    if (requisito.getNome().toLowerCase().contains(filterPattern)) {
+                        requisitosFiltrados.add(requisito);
+                    }
+                }
+            }
+
+            FilterResults resultados = new FilterResults();
+            resultados.values = requisitosFiltrados;
+
+            return resultados;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            requisitos.clear();
+            requisitos.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView requisito;
@@ -95,4 +140,5 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
     public List<Disciplina> getRequisitosSelecionados() {
         return requisitosSelecionados;
     }
+
 }

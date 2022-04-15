@@ -28,7 +28,7 @@ public class RecyclerRequisitoView {
     }
 
     public void atualizaRequisito(Disciplina disciplina) {
-        adapter.atualiza(disciplinaDAO.buscaRequisitoDisciplina(disciplina.getNome()));
+        adapter.atualiza(disciplinaDAO.buscaRequisitoDisciplina(disciplina.getId()));
     }
 
     public void configuraAdapter(RecyclerView requisitoRecycler) {

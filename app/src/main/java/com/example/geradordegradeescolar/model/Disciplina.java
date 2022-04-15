@@ -3,11 +3,11 @@ package com.example.geradordegradeescolar.model;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Disciplina implements Serializable {
 
+    private int id;
     private String nome;
     private String diaSemana;
     private String horarioIn;
@@ -29,7 +29,25 @@ public class Disciplina implements Serializable {
         this.horarioFn = horarioFn;
     }
 
+    public Disciplina(int id, String nome, String situacao, String diaSemana, String horarioIn,
+                      String horarioFn) {
+        this.id = id;
+        this.nome = nome;
+        this.situacao = situacao;
+        this.diaSemana = diaSemana;
+        this.horarioIn = horarioIn;
+        this.horarioFn = horarioFn;
+    }
+
     public Disciplina() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

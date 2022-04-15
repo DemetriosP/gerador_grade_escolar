@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.geradordegradeescolar.model.Disciplina;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class DisciplinaDAO {
@@ -36,24 +34,25 @@ public class DisciplinaDAO {
     public void alterar(Disciplina disciplina) {
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put("NOME", disciplina.getNome());
         contentValues.put("SITUACAO", disciplina.getSituacao());
         contentValues.put("DIA_SEMANA", disciplina.getDiaSemana());
         contentValues.put("HORARIO_IN", disciplina.getHorarioIn());
         contentValues.put("HORARIO_FN", disciplina.getHorarioFn());
 
-        conexao.update("DISCIPLINA", contentValues, "NOME = ?", new String[]{disciplina.getNome()});
+        conexao.update("DISCIPLINA", contentValues, "ID = ?", new String[]{String.valueOf(disciplina.getId())});
 
     }
 
     public void excluiDisciplina(Disciplina disciplina) {
 
         String[] parametros = new String[1];
-        parametros[0] = disciplina.getNome();
+        parametros[0] = String.valueOf(disciplina.getId());
 
-        if (temRequisito(disciplina.getNome())) conexao.delete("PRE_REQUISITO",
-                "DISCIPLINA_NOME = ?", parametros);
+        if (temRequisito(disciplina.getId())) conexao.delete("PRE_REQUISITO",
+                "ID_DISCIPLINA = ?", parametros);
 
-        conexao.delete("DISCIPLINA", "NOME = ?", parametros);
+        conexao.delete("DISCIPLINA", "ID_DISCIPLINA = ?", parametros);
     }
 
     public List<Disciplina> buscaTodos() {
@@ -71,14 +70,15 @@ public class DisciplinaDAO {
             do {
 
                 Disciplina disciplina = new Disciplina();
+                disciplina.setId(resultado.getInt(resultado.getColumnIndexOrThrow("ID")));
                 disciplina.setNome(resultado.getString(resultado.getColumnIndexOrThrow("NOME")));
                 disciplina.setSituacao(resultado.getString(resultado.getColumnIndexOrThrow("SITUACAO")));
                 disciplina.setDiaSemana(resultado.getString(resultado.getColumnIndexOrThrow("DIA_SEMANA")));
                 disciplina.setHorarioIn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_IN")));
                 disciplina.setHorarioFn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_FN")));
 
-                if (temRequisito(resultado.getString(resultado.getColumnIndexOrThrow("NOME")))) {
-                    disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getString(resultado.getColumnIndexOrThrow("NOME"))));
+                if (temRequisito(resultado.getInt(resultado.getColumnIndexOrThrow("ID")))) {
+                    disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getInt(resultado.getColumnIndexOrThrow("ID"))));
                 } else disciplina.setRequisitos(new ArrayList<>());
 
                 disciplinas.add(disciplina);
@@ -91,13 +91,13 @@ public class DisciplinaDAO {
         return disciplinas;
     }
 
-    public List<Disciplina> buscaRequisitoDisciplina(String nomeDisciplina) {
+    public List<Disciplina> buscaRequisitoDisciplina(int idDisciplina) {
 
         List<Disciplina> requisitos = new ArrayList<>();
 
-        String sql = "SELECT DISCIPLINA_NOME_REQUISITO FROM DISCIPLINA\n" +
-                "INNER JOIN PRE_REQUISITO ON DISCIPLINA.NOME = PRE_REQUISITO.DISCIPLINA_NOME\n" +
-                "WHERE NOME = '" + nomeDisciplina + "'";
+        String sql = "SELECT ID_DISCIPLINA_REQUISITO FROM DISCIPLINA\n" +
+                "INNER JOIN PRE_REQUISITO ON DISCIPLINA.ID = PRE_REQUISITO.ID_DISCIPLINA\n" +
+                "WHERE ID_DISCIPLINA = '" + idDisciplina + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 
@@ -108,8 +108,8 @@ public class DisciplinaDAO {
             Disciplina disciplina;
 
             do {
-                String nome = resultado.getString(resultado.getColumnIndexOrThrow("DISCIPLINA_NOME_REQUISITO"));
-                disciplina = buscaDisciplinaPorNome(nome);
+                int id = resultado.getInt(resultado.getColumnIndexOrThrow("ID_DISCIPLINA_REQUISITO"));
+                disciplina = buscaDisciplinaPorId(id);
                 requisitos.add(disciplina);
             } while (resultado.moveToNext());
 
@@ -119,11 +119,11 @@ public class DisciplinaDAO {
         return requisitos;
     }
 
-    public Disciplina buscaDisciplinaPorNome(String nomeDisciplina) {
+    public Disciplina buscaDisciplinaPorId(int idDisciplina) {
 
         Disciplina disciplina = new Disciplina();
 
-        String sql = "SELECT * FROM DISCIPLINA WHERE NOME = '" + nomeDisciplina + "'";
+        String sql = "SELECT * FROM DISCIPLINA WHERE ID = '" + idDisciplina + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 
@@ -133,14 +133,15 @@ public class DisciplinaDAO {
 
             do {
 
+                disciplina.setId(resultado.getInt(resultado.getColumnIndexOrThrow("ID")));
                 disciplina.setNome(resultado.getString(resultado.getColumnIndexOrThrow("NOME")));
                 disciplina.setSituacao(resultado.getString(resultado.getColumnIndexOrThrow("SITUACAO")));
                 disciplina.setDiaSemana(resultado.getString(resultado.getColumnIndexOrThrow("DIA_SEMANA")));
                 disciplina.setHorarioIn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_IN")));
                 disciplina.setHorarioFn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_FN")));
 
-                if (temRequisito(resultado.getString(resultado.getColumnIndexOrThrow("NOME")))) {
-                    disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getString(resultado.getColumnIndexOrThrow("NOME"))));
+                if (temRequisito(resultado.getInt(resultado.getColumnIndexOrThrow("ID")))) {
+                    disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getInt(resultado.getColumnIndexOrThrow("ID"))));
                 } else disciplina.setRequisitos(new ArrayList<>());
 
             } while (resultado.moveToNext());
@@ -152,12 +153,12 @@ public class DisciplinaDAO {
 
     }
 
-    public boolean temRequisito(String nome) {
+    public boolean temRequisito(int idDisciplina) {
 
-        String sql = "SELECT DISCIPLINA_NOME_REQUISITO\n" +
+        String sql = "SELECT ID_DISCIPLINA_REQUISITO\n" +
                 "FROM DISCIPLINA\n" +
-                "INNER JOIN PRE_REQUISITO ON DISCIPLINA.NOME = PRE_REQUISITO.DISCIPLINA_NOME\n" +
-                "WHERE NOME = '" + nome + "'";
+                "INNER JOIN PRE_REQUISITO ON DISCIPLINA.ID = PRE_REQUISITO.ID_DISCIPLINA\n" +
+                "WHERE ID = '" + idDisciplina + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 
@@ -170,8 +171,8 @@ public class DisciplinaDAO {
         ContentValues contentValues = new ContentValues();
 
         for (Disciplina requisito : requisitos) {
-            contentValues.put("DISCIPLINA_NOME", disciplina.getNome());
-            contentValues.put("DISCIPLINA_NOME_REQUISITO", requisito.getNome());
+            contentValues.put("ID_DISCIPLINA", disciplina.getId());
+            contentValues.put("ID_DISCIPLINA_REQUISITO", requisito.getId());
             conexao.insertOrThrow("PRE_REQUISITO", null, contentValues);
         }
 
@@ -180,28 +181,28 @@ public class DisciplinaDAO {
     public void excluirRequisito(Disciplina requisito) {
 
         String[] parametros = new String[1];
-        parametros[0] = requisito.getNome();
+        parametros[0] = String.valueOf(requisito.getId());
 
-        conexao.delete("PRE_REQUISITO", "DISCIPLINA_NOME_REQUISITO = ?", parametros);
+        conexao.delete("PRE_REQUISITO", "ID_DISCIPLINA_REQUISITO = ?", parametros);
 
     }
 
     public boolean eRequisito(Disciplina disciplina) {
 
         String sql = "SELECT * FROM PRE_REQUISITO\n" +
-                "WHERE DISCIPLINA_NOME_REQUISITO = '" + disciplina.getNome() + "'";
+                "WHERE ID_DISCIPLINA_REQUISITO = '" + disciplina.getId() + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 
         return resultado.getCount() > 0;
     }
 
-    public List<Disciplina> buscaOndeERequisito(String nomeDisciplina) {
+    public List<Disciplina> buscaOndeERequisito(int idDisciplina) {
 
         List<Disciplina> disciplinaRequisito = new ArrayList<>();
 
         String sql = "SELECT * FROM PRE_REQUISITO\n" +
-                "WHERE DISCIPLINA_NOME_REQUISITO = '" + nomeDisciplina + "'";
+                "WHERE ID_DISCIPLINA_REQUISITO = '" + idDisciplina + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 
@@ -212,8 +213,8 @@ public class DisciplinaDAO {
             do {
 
                 Disciplina disciplina;
-                disciplina = buscaDisciplinaPorNome(resultado.getString(resultado.
-                        getColumnIndexOrThrow("DISCIPLINA_NOME")));
+                disciplina = buscaDisciplinaPorId(resultado.getInt(resultado.
+                        getColumnIndexOrThrow("ID_DISCIPLINA")));
                 disciplinaRequisito.add(disciplina);
 
             } while (resultado.moveToNext());
@@ -225,10 +226,10 @@ public class DisciplinaDAO {
 
     }
 
-    public boolean temCadastro(String nomeDisciplina){
+    public boolean temCadastro(String disciplinaNome){
 
         String sql = "SELECT * FROM DISCIPLINA\n" +
-                "WHERE NOME = '" + nomeDisciplina + "'";
+                "WHERE NOME = '" + disciplinaNome + "'";
 
         Cursor resultado = conexao.rawQuery(sql, null);
 

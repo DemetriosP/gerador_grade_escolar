@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeradorDeGradeEscolar">
         <activity
-            android:name=".ui.activity.AcrescentaRequisitoActivity"
+            android:name=".ui.activity.RecyclerDisciplinaActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.FormLogin"
+            android:name=".ui.activity.AcrescentaRequisitoActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.RecyclerRequisitoActivity"
@@ -25,7 +25,7 @@
             android:name=".ui.activity.FormCasdastro"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.RecyclerDisciplinaActivity"
+            android:name=".ui.activity.FormLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

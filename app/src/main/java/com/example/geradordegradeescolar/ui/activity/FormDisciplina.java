@@ -60,14 +60,17 @@ public class FormDisciplina extends AppCompatActivity {
                     disciplina.setHorarioIn(null);
                     disciplina.setHorarioFn(null);
                     disciplinaDao.alterar(disciplina);
+                    finish();
                 } else {
                     if (disciplinaDao.temCadastro(nome)) {
                         Toast.makeText(this, "Disciplina já foi cadastrada", Toast.LENGTH_SHORT).show();
-                    } else
+                    } else {
                         disciplina = new Disciplina(nome, situacao);
-                    disciplinaDao.inserir(disciplina);
+                        disciplinaDao.inserir(disciplina);
+                        finish();
+                    }
                 }
-                finish();
+
             } else if (situacao.equals("Disponível")) {
                 if (horaIni.isEmpty() || horaFim.isEmpty() || dia == null || dia.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
@@ -79,15 +82,16 @@ public class FormDisciplina extends AppCompatActivity {
                         disciplina.setHorarioIn(horaIni);
                         disciplina.setHorarioFn(horaFim);
                         disciplinaDao.alterar(disciplina);
+                        finish();
                     } else {
                         if (disciplinaDao.temCadastro(nome)) {
                             Toast.makeText(this, "Disciplina já foi cadastrada", Toast.LENGTH_SHORT).show();
                         } else {
                             disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
                             disciplinaDao.inserir(disciplina);
+                            finish();
                         }
                     }
-                    finish();
                 }
             }
         });

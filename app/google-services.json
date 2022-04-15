@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950485372630",
+    "project_id": "geradorgrade",
+    "storage_bucket": "geradorgrade.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950485372630:android:99a95bc945052f70bbc377",
+        "android_client_info": {
+          "package_name": "com.example.geradordegradeescolar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950485372630-ng8b70th1h56nqi74nuvr3fg7b44e7nq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyT1KPL5y5WOcTDDpb0Q0TQaFhtYKwyo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950485372630-ng8b70th1h56nqi74nuvr3fg7b44e7nq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

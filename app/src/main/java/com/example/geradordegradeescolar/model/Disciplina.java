@@ -3,7 +3,9 @@ package com.example.geradordegradeescolar.model;
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Disciplina implements Serializable {
 
@@ -102,6 +104,20 @@ public class Disciplina implements Serializable {
     @Override
     public String toString() {
         return nome + "\nSituação: " + situacao;
+    }
+
+    public int diaDaSemanaParaInt(){
+
+        Map<String, Integer> diasDaSemana = new HashMap<>();
+
+        diasDaSemana.put("Segunda", 1);
+        diasDaSemana.put("Terça", 2);
+        diasDaSemana.put("Quarta", 3);
+        diasDaSemana.put("Quinta", 4);
+        diasDaSemana.put("Sexta", 5);
+
+        return diasDaSemana.get(this.diaSemana);
+
     }
 
 }

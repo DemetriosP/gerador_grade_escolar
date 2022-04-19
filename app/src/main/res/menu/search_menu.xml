@@ -8,4 +8,7 @@
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
+    <item android:title="@string/gerar_grade"
+        android:id="@+id/gerarGrade"/>
+
 </menu>

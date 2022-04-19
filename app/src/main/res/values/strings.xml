@@ -27,6 +27,8 @@
     <string name="confirma_requisito">Confirma Requisito</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="adicionar">Adicionar</string>
+    <string name="grade">Grade</string>
+    <string name="gerar_grade">Gerar grade</string>
 
     <string-array name="situacao">
         <item>Concluído</item>
@@ -40,6 +42,12 @@
         <item>Quarta</item>
         <item>Quinta</item>
         <item>Sexta</item>
+    </string-array>
+
+    <string-array name="periodo">
+        <item>Primeiro período</item>
+        <item>Segundo período</item>
+        <item>Período total</item>
     </string-array>
 
 </resources>

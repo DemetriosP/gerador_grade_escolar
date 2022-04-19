@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +67,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
+        MenuItem gradeItem = menu.findItem(R.id.gerarGrade);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -78,6 +80,12 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
                 recyclerDisciplinaView.getAdapter().getFilter().filter(newText);
                 return false;
             }
+        });
+
+        gradeItem.setOnMenuItemClickListener(demetriositem -> {
+            Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerGradeActivity.class);
+            startActivity(intent);
+            return false;
         });
 
         return true;

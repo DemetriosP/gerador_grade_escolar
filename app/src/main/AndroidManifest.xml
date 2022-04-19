@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeradorDeGradeEscolar">
         <activity
+            android:name=".ui.activity.RecyclerGradeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RecyclerDisciplinaActivity"
             android:exported="false" />
         <activity

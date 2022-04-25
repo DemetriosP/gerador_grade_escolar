@@ -11,13 +11,13 @@
         android:id="@+id/textCadastre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:text="@string/entrar"
+        android:textColor="@color/black"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="40sp"
-        android:textColor="@color/black"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editEmailLayout"
@@ -76,41 +76,29 @@
         app:layout_constraintTop_toBottomOf="@+id/editSenhaLayout" />
 
     <TextView
-        android:id="@+id/textEsqueceuSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/esqueceu_sua_senha"
-        android:textColor="@color/soft_blue"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
-
-    <TextView
         android:id="@+id/textCadastrese"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="50dp"
         android:text="@string/cadastre_se"
         android:textColor="@color/soft_blue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEsqueceuSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
 
     <TextView
         android:id="@+id/textNaoConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         android:text="@string/nao_conta"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/textCadastrese"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEsqueceuSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/btEntrar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

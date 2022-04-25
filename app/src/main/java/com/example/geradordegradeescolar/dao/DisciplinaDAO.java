@@ -52,7 +52,7 @@ public class DisciplinaDAO {
         if (temRequisito(disciplina.getId())) conexao.delete("PRE_REQUISITO",
                 "ID_DISCIPLINA = ?", parametros);
 
-        conexao.delete("DISCIPLINA", "ID_DISCIPLINA = ?", parametros);
+        conexao.delete("DISCIPLINA", "ID = ?", parametros);
     }
 
     public List<Disciplina> buscaTodos() {

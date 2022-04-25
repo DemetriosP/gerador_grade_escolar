@@ -25,7 +25,7 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
 
     private final Context context;
     private final List<Disciplina> disciplinas;
-    private final List<Disciplina> disciplinasPesquisa;
+    private List<Disciplina> disciplinasPesquisa;
 
     public RecyclerDisciplinaAdapter(Context contexto, List<Disciplina> d) {
         this.context = contexto;
@@ -119,12 +119,15 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
 
     public void remove(Disciplina disciplina) {
         disciplinas.remove(disciplina);
+        disciplinasPesquisa.remove(disciplina);
         notifyDataSetChanged();
     }
 
     public void atualiza(List<Disciplina> disciplinas) {
         this.disciplinas.clear();
         this.disciplinas.addAll(disciplinas);
+        this.disciplinasPesquisa.clear();
+        this.disciplinasPesquisa = new ArrayList<>(disciplinas);
         notifyDataSetChanged();
     }
 }

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -31,6 +32,16 @@ public class FormLogin extends AppCompatActivity {
         iniciarComponentes();
         vaiTelaCadastrese();
         entrar();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(usuarioAtual != null){
+            vaiTelaDisciplina();
+        }
     }
 
     private void entrar() {
@@ -53,7 +64,7 @@ public class FormLogin extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
 
                     if(task.isSuccessful()){
-                        //progressBar.setVisibility(View.VISIBLE);
+                        //progressBar.setVisibility(v.VISIBLE);
                         new Handler().postDelayed(this::vaiTelaDisciplina, 1000);
                     }else{
                         try {

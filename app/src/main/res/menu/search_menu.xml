@@ -11,4 +11,7 @@
     <item android:title="@string/gerar_grade"
         android:id="@+id/gerarGrade"/>
 
+    <item android:title="@string/sair"
+        android:id="@+id/sair"/>
+
 </menu>

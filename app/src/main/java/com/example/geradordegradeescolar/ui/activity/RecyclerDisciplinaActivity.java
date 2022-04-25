@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.geradordegradeescolar.R;
 import com.example.geradordegradeescolar.ui.view.RecyclerDisciplinaView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
@@ -68,6 +68,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         MenuItem gradeItem = menu.findItem(R.id.gerarGrade);
+        MenuItem sairItem = menu.findItem(R.id.sair);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -82,9 +83,17 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
             }
         });
 
-        gradeItem.setOnMenuItemClickListener(demetriositem -> {
+        gradeItem.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerGradeActivity.class);
             startActivity(intent);
+            return false;
+        });
+
+        sairItem.setOnMenuItemClickListener(item -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(RecyclerDisciplinaActivity.this, FormLogin.class);
+            startActivity(intent);
+            finish();
             return false;
         });
 

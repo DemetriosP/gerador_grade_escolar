@@ -16,6 +16,7 @@ public class Grade {
         List<Disciplina> disciplinasDisponiveis = new ArrayList<>();
         List<Disciplina> disciplinasDiasIguais = new ArrayList<>();
         List<Disciplina> gradeDisciplinas = new ArrayList<>();
+
         int primeiroOndeRequisito, segundoOndeRequisito;
 
         Conexao conexao = new Conexao(context);
@@ -28,7 +29,7 @@ public class Grade {
             }
         }
 
-        if(disciplinasDisponiveis.size() > 1) {
+        if (disciplinasDisponiveis.size() > 1) {
 
             //ordena lista pelos dias da semana
             disciplinasDisponiveis.sort(Comparator.comparing(Disciplina::diaDaSemanaParaInt));
@@ -137,7 +138,7 @@ public class Grade {
 
     }
 
-    public boolean comparaHorario(Disciplina primeiraDisciplina, Disciplina segundaDisciplina){
+    public boolean comparaHorario(Disciplina primeiraDisciplina, Disciplina segundaDisciplina) {
 
         int primeiroIn = Integer.parseInt(primeiraDisciplina.getHorarioIn().replaceAll("[:]", ""));
         int primeiroFn = Integer.parseInt(primeiraDisciplina.getHorarioFn().replaceAll("[:]", ""));

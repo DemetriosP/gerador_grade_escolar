@@ -29,11 +29,12 @@
     <string name="adicionar">Adicionar</string>
     <string name="grade">Grade</string>
     <string name="gerar_grade">Gerar grade</string>
+    <string name="sair">Sair</string>
 
     <string-array name="situacao">
-        <item>Concluído</item>
-        <item>Pendente</item>
-        <item>Disponível</item>
+        <item>Cursado</item>
+        <item>À Cursar</item>
+        <item>Em Curso</item>
     </string-array>
 
     <string-array name="dia">
@@ -45,9 +46,9 @@
     </string-array>
 
     <string-array name="periodo">
-        <item>Primeiro período</item>
-        <item>Segundo período</item>
-        <item>Período total</item>
+        <item>Primeiro Período</item>
+        <item>Segundo Período</item>
+        <item>Todo Período</item>
     </string-array>
 
 </resources>

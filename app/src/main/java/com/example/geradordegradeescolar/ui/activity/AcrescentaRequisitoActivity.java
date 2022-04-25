@@ -50,5 +50,4 @@ public class AcrescentaRequisitoActivity extends AppCompatActivity {
 
     }
 
-
 }

@@ -52,7 +52,7 @@ public class FormDisciplina extends AppCompatActivity {
 
             if (nome == null || nome.isEmpty() || situacao == null || situacao.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-            } else if (situacao.equals("Concluído") || situacao.equals("Pendente")) {
+            } else if (situacao.equals("Cursado") || situacao.equals("À Cursar")) {
                 if (dados.hasExtra("disciplina")) {
                     disciplina.setNome(nome);
                     disciplina.setSituacao(situacao);
@@ -71,7 +71,7 @@ public class FormDisciplina extends AppCompatActivity {
                     }
                 }
 
-            } else if (situacao.equals("Disponível")) {
+            } else if (situacao.equals("Em Curso")) {
                 if (horaIni.isEmpty() || horaFim.isEmpty() || dia == null || dia.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {

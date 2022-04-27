@@ -17,8 +17,7 @@ public class ScriptDLL {
                 "NOME VARCHAR (250) NOT NULL UNIQUE, " +
                 "SITUACAO VARCHAR (250) NOT NULL, " +
                 "DIA_SEMANA VARCHAR (250), " +
-                "HORARIO_IN VARCHAR (250), " +
-                "HORARIO_FN VARCHAR (250) )";
+                "PERIODO VARCHAR (250) )";
 
     }
 

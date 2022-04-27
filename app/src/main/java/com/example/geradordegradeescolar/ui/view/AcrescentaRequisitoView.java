@@ -47,7 +47,7 @@ public class AcrescentaRequisitoView {
 
     public void acresentaRequisitos(Disciplina disciplina) {
         List<Disciplina> requisitos = adapter.getRequisitosSelecionados();
-        disciplinaDAO.insereRequisitos(disciplina, requisitos);
+        disciplinaDAO.insereRequisitosLista(disciplina, requisitos);
     }
 
 }

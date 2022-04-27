@@ -61,7 +61,7 @@ public class Grade {
                         while (execucao) {
 
                             //verifica se o horario das disciplinas são conflitantes
-                            if (!comparaHorario(disciplinasDiasIguais.get(x), disciplinasDiasIguais.get(y))) {
+                            if (!comparaPeriodo(disciplinasDiasIguais.get(x), disciplinasDiasIguais.get(y))) {
 
                                 //se for, busca qual disciplina e mais pré requisito em outras disciplinas
                                 primeiroOndeRequisito = dao.buscaOndeERequisito(disciplinasDiasIguais.get(x).getId()).size();
@@ -107,26 +107,23 @@ public class Grade {
                     } else {
 
                         //remove os dois pontos do horario da aula dos dois dias, para ver se as aulas acontem ao mesmo tempo
-                        int primeiroIn = Integer.parseInt(disciplinasDiasIguais.get(0).getHorarioIn().replaceAll("[:]", ""));
-                        int primeiroFn = Integer.parseInt(disciplinasDiasIguais.get(0).getHorarioFn().replaceAll("[:]", ""));
-                        int segundoIn = Integer.parseInt(disciplinasDiasIguais.get(1).getHorarioIn().replaceAll("[:]", ""));
-                        int segundoFn = Integer.parseInt(disciplinasDiasIguais.get(1).getHorarioFn().replaceAll("[:]", ""));
+                        String primeiroPeriodo = disciplinasDiasIguais.get(0).getPeriodo();
+                        String segundoPeriodo = disciplinasDiasIguais.get(1).getPeriodo();
 
-                        /*se os horarios das aulas foram diferentes, adiciona as duas disciplinas
-                        na lista final de disciplinas*/
-                        if (primeiroIn != segundoIn && primeiroFn != segundoFn)
-                            gradeDisciplinas.addAll(disciplinasDiasIguais);
-                        else {
+                        /*se as disciplinas tiverem aula no mesmo horario, verifica qual disciplina é requisito de mais disciplinas e
+                        adiciona ela na lista final*/
+                        if (primeiroPeriodo.equals(segundoPeriodo) || primeiroPeriodo.equals("Todo Período") || segundoPeriodo.equals("Todo Periodo")){
 
-                            /*se as disciplinas tiverem aula no mesmo horario, verifica qual disciplina é requisito de mais disciplinas e
-                            adiciona ela na lista final*/
                             primeiroOndeRequisito = dao.buscaOndeERequisito(disciplinasDiasIguais.get(0).getId()).size();
                             segundoOndeRequisito = dao.buscaOndeERequisito(disciplinasDiasIguais.get(1).getId()).size();
 
                             if (primeiroOndeRequisito > segundoOndeRequisito)
                                 gradeDisciplinas.add(disciplinasDiasIguais.get(0));
                             else gradeDisciplinas.add(disciplinasDiasIguais.get(1));
-                        }
+
+                        /*se os horarios das aulas foram diferentes, adiciona as duas disciplinas
+                        na lista final de disciplinas*/
+                        } else gradeDisciplinas.addAll(disciplinasDiasIguais);
                     }
 
                 } else gradeDisciplinas.addAll(disciplinasDiasIguais);
@@ -138,16 +135,15 @@ public class Grade {
 
     }
 
-    public boolean comparaHorario(Disciplina primeiraDisciplina, Disciplina segundaDisciplina) {
+    public boolean comparaPeriodo(Disciplina primeiraDisciplina, Disciplina segundaDisciplina) {
 
-        int primeiroIn = Integer.parseInt(primeiraDisciplina.getHorarioIn().replaceAll("[:]", ""));
-        int primeiroFn = Integer.parseInt(primeiraDisciplina.getHorarioFn().replaceAll("[:]", ""));
-        int segundoIn = Integer.parseInt(segundaDisciplina.getHorarioIn().replaceAll("[:]", ""));
-        int segundoFn = Integer.parseInt(segundaDisciplina.getHorarioFn().replaceAll("[:]", ""));
+        String primeiroPeriodo = primeiraDisciplina.getPeriodo();
+        String segundoPeriodo = segundaDisciplina.getPeriodo();
 
         /*se for true - horarios diferentes
-        se for false - horarios iguais*/
-        return primeiroIn != segundoIn && primeiroFn != segundoFn;
+        se for false - horarios iguais ou conflitantes*/
+        return primeiroPeriodo.equals(segundoPeriodo) || primeiroPeriodo.equals("Todo Período")
+                || segundoPeriodo.equals("Todo Periodo");
 
     }
 

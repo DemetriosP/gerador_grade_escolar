@@ -23,8 +23,7 @@ public class DisciplinaDAO {
         contentValues.put("NOME", disciplina.getNome());
         contentValues.put("SITUACAO", disciplina.getSituacao());
         contentValues.put("DIA_SEMANA", disciplina.getDiaSemana());
-        contentValues.put("HORARIO_IN", disciplina.getHorarioIn());
-        contentValues.put("HORARIO_FN", disciplina.getHorarioFn());
+        contentValues.put("PERIODO", disciplina.getPeriodo());
 
         conexao.insertOrThrow("DISCIPLINA", null, contentValues);
 
@@ -37,8 +36,7 @@ public class DisciplinaDAO {
         contentValues.put("NOME", disciplina.getNome());
         contentValues.put("SITUACAO", disciplina.getSituacao());
         contentValues.put("DIA_SEMANA", disciplina.getDiaSemana());
-        contentValues.put("HORARIO_IN", disciplina.getHorarioIn());
-        contentValues.put("HORARIO_FN", disciplina.getHorarioFn());
+        contentValues.put("PERIODO", disciplina.getPeriodo());
 
         conexao.update("DISCIPLINA", contentValues, "ID = ?", new String[]{String.valueOf(disciplina.getId())});
 
@@ -74,8 +72,7 @@ public class DisciplinaDAO {
                 disciplina.setNome(resultado.getString(resultado.getColumnIndexOrThrow("NOME")));
                 disciplina.setSituacao(resultado.getString(resultado.getColumnIndexOrThrow("SITUACAO")));
                 disciplina.setDiaSemana(resultado.getString(resultado.getColumnIndexOrThrow("DIA_SEMANA")));
-                disciplina.setHorarioIn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_IN")));
-                disciplina.setHorarioFn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_FN")));
+                disciplina.setPeriodo(resultado.getString(resultado.getColumnIndexOrThrow("PERIODO")));
 
                 if (temRequisito(resultado.getInt(resultado.getColumnIndexOrThrow("ID")))) {
                     disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getInt(resultado.getColumnIndexOrThrow("ID"))));
@@ -137,8 +134,7 @@ public class DisciplinaDAO {
                 disciplina.setNome(resultado.getString(resultado.getColumnIndexOrThrow("NOME")));
                 disciplina.setSituacao(resultado.getString(resultado.getColumnIndexOrThrow("SITUACAO")));
                 disciplina.setDiaSemana(resultado.getString(resultado.getColumnIndexOrThrow("DIA_SEMANA")));
-                disciplina.setHorarioIn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_IN")));
-                disciplina.setHorarioFn(resultado.getString(resultado.getColumnIndexOrThrow("HORARIO_FN")));
+                disciplina.setPeriodo(resultado.getString(resultado.getColumnIndexOrThrow("PERIODO")));
 
                 if (temRequisito(resultado.getInt(resultado.getColumnIndexOrThrow("ID")))) {
                     disciplina.setRequisitos(buscaRequisitoDisciplina(resultado.getInt(resultado.getColumnIndexOrThrow("ID"))));
@@ -166,7 +162,7 @@ public class DisciplinaDAO {
 
     }
 
-    public void insereRequisitos(Disciplina disciplina, List<Disciplina> requisitos) {
+    public void insereRequisitosLista(Disciplina disciplina, List<Disciplina> requisitos) {
 
         ContentValues contentValues = new ContentValues();
 
@@ -177,6 +173,17 @@ public class DisciplinaDAO {
         }
 
     }
+
+    public void insereRequisitos(Disciplina disciplina, Disciplina requisito) {
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("ID_DISCIPLINA", disciplina.getId());
+        contentValues.put("ID_DISCIPLINA_REQUISITO", requisito.getId());
+        conexao.insertOrThrow("PRE_REQUISITO", null, contentValues);
+
+    }
+
 
     public void excluirRequisito(Disciplina requisito) {
 
@@ -234,6 +241,32 @@ public class DisciplinaDAO {
         Cursor resultado = conexao.rawQuery(sql, null);
 
         return resultado.getCount() > 0;
+
+    }
+
+    public Disciplina buscaDisciplinaPorNome(String disciplinaNome) {
+
+        String sql = "SELECT ID FROM DISCIPLINA\n" +
+                "WHERE NOME = '" + disciplinaNome + "'";
+
+        Cursor resultado = conexao.rawQuery(sql, null);
+
+        Disciplina disciplina = new Disciplina();
+
+        if (resultado.getCount() > 0) {
+
+            resultado.moveToFirst();
+
+            do {
+
+                disciplina = buscaDisciplinaPorId(resultado.getInt(resultado.
+                        getColumnIndexOrThrow("ID")));
+
+            } while (resultado.moveToNext());
+
+        }
+
+        return disciplina;
 
     }
 }

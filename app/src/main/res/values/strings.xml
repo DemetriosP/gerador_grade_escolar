@@ -30,6 +30,8 @@
     <string name="grade">Grade</string>
     <string name="gerar_grade">Gerar grade</string>
     <string name="sair">Sair</string>
+    <string name="importar_disciplinas">Importar Disciplinas</string>
+    <string name="importar_pr_requisitos">Importar Pré-Requisitos</string>
 
     <string-array name="situacao">
         <item>Cursado</item>

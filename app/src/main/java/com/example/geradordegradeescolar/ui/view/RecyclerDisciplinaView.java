@@ -1,9 +1,16 @@
 package com.example.geradordegradeescolar.ui.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.SQLException;
+import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,15 +19,29 @@ import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.example.geradordegradeescolar.ui.adapter.RecyclerDisciplinaAdapter;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class RecyclerDisciplinaView {
 
     private final Context contexto;
     private final RecyclerDisciplinaAdapter adapter;
+
+    public Conexao getConexao() {
+        return conexao;
+    }
+
+    private final Conexao conexao;
+    public DisciplinaDAO getDisciplinaDAO() {
+        return disciplinaDAO;
+    }
+
     private final DisciplinaDAO disciplinaDAO;
 
     public RecyclerDisciplinaView(Context contexto) {
         this.contexto = contexto;
-        Conexao conexao = new Conexao(contexto);
+        this.conexao = new Conexao(contexto);
         this.disciplinaDAO = new DisciplinaDAO(conexao.getConexao());
         this.adapter = new RecyclerDisciplinaAdapter(this.contexto, this.disciplinaDAO.buscaTodos());
     }
@@ -70,5 +91,6 @@ public class RecyclerDisciplinaView {
     public RecyclerDisciplinaAdapter getAdapter() {
         return adapter;
     }
+
 
 }

@@ -12,8 +12,7 @@ public class Disciplina implements Serializable {
     private int id;
     private String nome;
     private String diaSemana;
-    private String horarioIn;
-    private String horarioFn;
+    private String periodo;
     private String situacao;
     private List<Disciplina> requisitos;
 
@@ -22,23 +21,19 @@ public class Disciplina implements Serializable {
         this.situacao = situacao;
     }
 
-    public Disciplina(String nome, String situacao, String diaSemana, String horarioIn,
-                      String horarioFn) {
+    public Disciplina(String nome, String situacao, String diaSemana, String periodo) {
         this.nome = nome;
         this.situacao = situacao;
         this.diaSemana = diaSemana;
-        this.horarioIn = horarioIn;
-        this.horarioFn = horarioFn;
+        this.periodo = periodo;
     }
 
-    public Disciplina(int id, String nome, String situacao, String diaSemana, String horarioIn,
-                      String horarioFn) {
+    public Disciplina(int id, String nome, String situacao, String diaSemana, String periodo) {
         this.id = id;
         this.nome = nome;
         this.situacao = situacao;
         this.diaSemana = diaSemana;
-        this.horarioIn = horarioIn;
-        this.horarioFn = horarioFn;
+        this.periodo = periodo;
     }
 
     public Disciplina() {
@@ -68,20 +63,12 @@ public class Disciplina implements Serializable {
         this.diaSemana = diaSemana;
     }
 
-    public String getHorarioIn() {
-        return horarioIn;
+    public String getPeriodo() {
+        return periodo;
     }
 
-    public void setHorarioIn(String horarioIn) {
-        this.horarioIn = horarioIn;
-    }
-
-    public String getHorarioFn() {
-        return horarioFn;
-    }
-
-    public void setHorarioFn(String horarioFn) {
-        this.horarioFn = horarioFn;
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
     }
 
     public String getSituacao() {
@@ -106,7 +93,7 @@ public class Disciplina implements Serializable {
         return nome + "\nSituação: " + situacao;
     }
 
-    public int diaDaSemanaParaInt(){
+    public int diaDaSemanaParaInt() {
 
         Map<String, Integer> diasDaSemana = new HashMap<>();
 

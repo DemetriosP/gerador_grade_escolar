@@ -19,11 +19,11 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class FormDisciplina extends AppCompatActivity {
 
-    private AutoCompleteTextView autoSituacao, autoDia;
-    private EditText etHoraIni, etHoraFim, etNome;
-    private String[] situacoes, dias;
-    private String horaIni, horaFim, nome, situacao, dia;
-    private TextInputLayout diaLayout, horaIniLayout, horaFinLayout;
+    private AutoCompleteTextView autoSituacao, autoDia, autoPeriodo;
+    private EditText etNome;
+    private String[] situacoes, dias, periodos;
+    private String nome, situacao, dia, periodo;
+    private TextInputLayout diaLayout, periodoLayout;
     private Button btSalvar;
     private Disciplina disciplina;
     private DisciplinaDAO disciplinaDao;
@@ -37,6 +37,7 @@ public class FormDisciplina extends AppCompatActivity {
         iniciarComponentes();
         preencheDrompDownMenu(situacoes, autoSituacao);
         preencheDrompDownMenu(dias, autoDia);
+        preencheDrompDownMenu(periodos, autoPeriodo);
         configuraOnClinkDrop();
         cadastrarDisciplina();
         carregaDisciplina();
@@ -57,8 +58,7 @@ public class FormDisciplina extends AppCompatActivity {
                     disciplina.setNome(nome);
                     disciplina.setSituacao(situacao);
                     disciplina.setDiaSemana(null);
-                    disciplina.setHorarioIn(null);
-                    disciplina.setHorarioFn(null);
+                    disciplina.setPeriodo(null);
                     disciplinaDao.alterar(disciplina);
                     finish();
                 } else {
@@ -72,22 +72,21 @@ public class FormDisciplina extends AppCompatActivity {
                 }
 
             } else if (situacao.equals("Em Curso")) {
-                if (horaIni.isEmpty() || horaFim.isEmpty() || dia == null || dia.isEmpty()) {
+                if (periodo.isEmpty() || dia == null || dia.isEmpty()) {
                     Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
                     if (dados.hasExtra("disciplina")) {
                         disciplina.setNome(nome);
                         disciplina.setSituacao(situacao);
                         disciplina.setDiaSemana(dia);
-                        disciplina.setHorarioIn(horaIni);
-                        disciplina.setHorarioFn(horaFim);
+                        disciplina.setPeriodo(periodo);
                         disciplinaDao.alterar(disciplina);
                         finish();
                     } else {
                         if (disciplinaDao.temCadastro(nome)) {
                             Toast.makeText(this, "Disciplina já foi cadastrada", Toast.LENGTH_SHORT).show();
                         } else {
-                            disciplina = new Disciplina(nome, situacao, dia, horaIni, horaFim);
+                            disciplina = new Disciplina(nome, situacao, dia, periodo);
                             disciplinaDao.inserir(disciplina);
                             finish();
                         }
@@ -110,8 +109,7 @@ public class FormDisciplina extends AppCompatActivity {
 
     private void alteraVisbilidadeCampos(int visible) {
         diaLayout.setVisibility(visible);
-        horaIniLayout.setVisibility(visible);
-        horaFinLayout.setVisibility(visible);
+        periodoLayout.setVisibility(visible);
     }
 
     private void preencheDrompDownMenu(String[] valores, AutoCompleteTextView menu) {
@@ -141,8 +139,7 @@ public class FormDisciplina extends AppCompatActivity {
         if (disciplina.getSituacao().equals(situacoes[2])) {
             alteraVisbilidadeCampos(View.VISIBLE);
             autoDia.setText(disciplina.getDiaSemana(), false);
-            etHoraIni.setText(String.valueOf(disciplina.getHorarioIn()));
-            etHoraFim.setText(String.valueOf(disciplina.getHorarioFn()));
+            autoPeriodo.setText(String.valueOf(disciplina.getPeriodo()));
         }
 
     }
@@ -153,17 +150,15 @@ public class FormDisciplina extends AppCompatActivity {
         autoDia = findViewById(R.id.autoCompleteDia);
         dias = getResources().getStringArray(R.array.dia);
         diaLayout = findViewById(R.id.editDiaLayoyt);
-        etHoraIni = findViewById(R.id.editHoraIn);
-        horaIniLayout = findViewById(R.id.editHInitLayoyt);
-        etHoraFim = findViewById(R.id.editHoraFim);
-        horaFinLayout = findViewById(R.id.editHFinLayoyt);
+        periodos = getResources().getStringArray(R.array.periodo);
+        autoPeriodo = findViewById(R.id.autoCompletePeriodo);
+        periodoLayout = findViewById(R.id.editPeriodoLayoyt);
         btSalvar = findViewById(R.id.btSalvar);
         etNome = findViewById(R.id.editNome);
     }
 
     private void converteComponenteString() {
-        horaIni = etHoraIni.getText().toString();
-        horaFim = etHoraFim.getText().toString();
+        periodo = autoPeriodo.getText().toString();
         nome = etNome.getText().toString();
         dia = autoDia.getText().toString();
         situacao = autoSituacao.getText().toString();

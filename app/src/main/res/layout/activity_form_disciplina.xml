@@ -78,13 +78,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editHInitLayoyt"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/editPeriodoLayoyt"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:hint="@string/horario_inicial"
+        android:hint="Período"
         android:textColorHint="@color/gray"
         android:visibility="gone"
         app:hintTextColor="@color/gray"
@@ -92,34 +92,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDiaLayoyt">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editHoraIn"
+        <AutoCompleteTextView
+            android:id="@+id/autoCompletePeriodo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:inputType="time" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="1"
+            android:inputType="none"
+            tools:ignore="LabelFor"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editHFinLayoyt"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:hint="@string/horario_final"
-        android:textColorHint="@color/gray"
-        android:visibility="gone"
-        app:hintTextColor="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editHInitLayoyt">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editHoraFim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="time" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -129,8 +109,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:text="@string/salvar"
-        app:layout_constraintEnd_toEndOf="@+id/editHFinLayoyt"
-        app:layout_constraintStart_toStartOf="@+id/editHFinLayoyt"
-        app:layout_constraintTop_toBottomOf="@+id/editHFinLayoyt" />
+        app:layout_constraintEnd_toEndOf="@+id/editPeriodoLayoyt"
+        app:layout_constraintStart_toStartOf="@+id/editPeriodoLayoyt"
+        app:layout_constraintTop_toBottomOf="@+id/editPeriodoLayoyt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

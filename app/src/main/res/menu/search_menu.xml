@@ -8,16 +8,7 @@
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
-    <item android:title="@string/gerar_grade"
-        android:id="@+id/gerarGrade"/>
-
     <item android:title="@string/sair"
         android:id="@+id/sair"/>
-
-    <item android:title="@string/importar_disciplinas"
-        android:id="@+id/importarDisciplinas"/>
-
-    <item android:title="@string/importar_pr_requisitos"
-        android:id="@+id/importarPreRequisitos"/>
 
 </menu>

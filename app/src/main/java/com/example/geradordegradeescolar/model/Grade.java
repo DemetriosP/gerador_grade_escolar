@@ -17,14 +17,14 @@ public class Grade {
         List<Disciplina> disciplinasDiasIguais = new ArrayList<>();
         List<Disciplina> gradeDisciplinas = new ArrayList<>();
 
-        int primeiroOndeRequisito, segundoOndeRequisito;
+        int primeiroOndeRequisito, segundoOndeRequisito, quantDiasIguais;
 
         Conexao conexao = new Conexao(context);
         DisciplinaDAO dao = new DisciplinaDAO(conexao.getConexao());
 
         //preenche lista com as disciplinas disponiveis
         for (Disciplina disciplina : disciplinas) {
-            if (disciplina.getSituacao().equals("Disponível")) {
+            if (disciplina.getSituacao().equals("Em Curso")) {
                 disciplinasDisponiveis.add(disciplina);
             }
         }
@@ -42,10 +42,12 @@ public class Grade {
                 for (int segundaPosicao = primeiraPosicao + 1; segundaPosicao < disciplinasDisponiveis.size(); segundaPosicao++) {
 
                     //se houver disciplinas no mesmo dia, coloca ela na lista disciplinasDiasIguais
-                    if (disciplinasDisponiveis.get(primeiraPosicao).equals(disciplinasDisponiveis.get(segundaPosicao))) {
+                    if (disciplinasDisponiveis.get(primeiraPosicao).getDiaSemana().equals(disciplinasDisponiveis.get(segundaPosicao).getDiaSemana())) {
                         disciplinasDiasIguais.add(disciplinasDisponiveis.get(segundaPosicao));
                     }
                 }
+
+                quantDiasIguais = disciplinasDiasIguais.size();
 
                 //se a lista for maior que 1, logo temos disciplinas no mesmo dia
                 if (disciplinasDiasIguais.size() > 1) {
@@ -61,7 +63,7 @@ public class Grade {
                         while (execucao) {
 
                             //verifica se o horario das disciplinas são conflitantes
-                            if (!comparaPeriodo(disciplinasDiasIguais.get(x), disciplinasDiasIguais.get(y))) {
+                            if (comparaPeriodo(disciplinasDiasIguais.get(x), disciplinasDiasIguais.get(y))) {
 
                                 //se for, busca qual disciplina e mais pré requisito em outras disciplinas
                                 primeiroOndeRequisito = dao.buscaOndeERequisito(disciplinasDiasIguais.get(x).getId()).size();
@@ -70,14 +72,35 @@ public class Grade {
                                 //faz comparação para saber qual disciplina vai ser escolhida
                                 if (primeiroOndeRequisito > segundoOndeRequisito) {
                                     disciplinasDiasIguais.remove(y);
-                                    if (disciplinasDiasIguais.size() == 1) execucao = false;
-                                    /*
+                                    y = 1;
+                                    if (disciplinasDiasIguais.size() == 1) {
+                                        gradeDisciplinas.addAll(disciplinasDiasIguais);
+                                        execucao = false;
+                                    }
+
+                                //se as disciplinas tiverem a mesma quantidade de requisitos
                                 }else if(primeiroOndeRequisito == segundoOndeRequisito){
-                                    execucao = false;
-                                     */
+
+                                    primeiroOndeRequisito = requisitosRecursivo(disciplinasDiasIguais.get(x), dao);
+                                    segundoOndeRequisito = requisitosRecursivo(disciplinasDiasIguais.get(y), dao);
+
+                                    if(primeiroOndeRequisito > segundoOndeRequisito) disciplinasDiasIguais.remove(y);
+                                    else disciplinasDiasIguais.remove(x);
+
+                                    y = 1;
+
+                                    if (disciplinasDiasIguais.size() == 1) {
+                                        gradeDisciplinas.addAll(disciplinasDiasIguais);
+                                        execucao = false;
+                                    }
+
                                 } else {
                                     disciplinasDiasIguais.remove(x);
-                                    if (disciplinasDiasIguais.size() == 1) execucao = false;
+                                    y = 1;
+                                    if (disciplinasDiasIguais.size() == 1) {
+                                        gradeDisciplinas.addAll(disciplinasDiasIguais);
+                                        execucao = false;
+                                    }
                                 }
 
                             /*se as disciplinas não tem horarios conflitantes, verifica se o
@@ -106,7 +129,7 @@ public class Grade {
                         //se na lista tiver somente 2 numeros
                     } else {
 
-                        //remove os dois pontos do horario da aula dos dois dias, para ver se as aulas acontem ao mesmo tempo
+                        //recebe o periodo das aulas
                         String primeiroPeriodo = disciplinasDiasIguais.get(0).getPeriodo();
                         String segundoPeriodo = disciplinasDiasIguais.get(1).getPeriodo();
 
@@ -128,7 +151,11 @@ public class Grade {
 
                 } else gradeDisciplinas.addAll(disciplinasDiasIguais);
 
+                primeiraPosicao+= quantDiasIguais -1;
+
             }
+
+
         }
         //retorna a lista com as disciplinas da grade
         return gradeDisciplinas;
@@ -142,10 +169,33 @@ public class Grade {
 
         /*se for true - horarios diferentes
         se for false - horarios iguais ou conflitantes*/
+
         return primeiroPeriodo.equals(segundoPeriodo) || primeiroPeriodo.equals("Todo Período")
-                || segundoPeriodo.equals("Todo Periodo");
+                || segundoPeriodo.equals("Todo Período");
 
     }
+
+    public int requisitosRecursivo(Disciplina disciplinas, DisciplinaDAO dao){
+
+        int quantReq = 0;
+
+        for (Disciplina disciplina: disciplinas.getRequisitos()) {
+
+            if(dao.temRequisito(disciplina.getId())){
+
+                quantReq += requisitosRecursivo(disciplina, dao);
+
+            }else {
+                quantReq += dao.buscaOndeERequisito(disciplina.getId()).size();
+            }
+
+        }
+
+        return quantReq;
+
+    }
+
+
 
 
 }

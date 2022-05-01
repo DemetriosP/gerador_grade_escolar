@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -33,12 +36,59 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     private RecyclerDisciplinaView recyclerDisciplinaView;
     private ActivityResultLauncher<Intent> csvDisciplinaLaucher;
     private ActivityResultLauncher<Intent> csvPreRequisitoLaucher;
+    private Animation fabOpen, fabClose, fromBottom, toBotton;
+    FloatingActionButton botaoDisciplinaArquivo, botaoRequisitoArquivo, botaoGerarGrade, botaoPrincipal, botaoNovaDisciplina;
+    boolean isOpen = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_disciplina);
         setTitle("Disciplinas");
+
+        botaoDisciplinaArquivo = findViewById(R.id.fabDisciplinaArquivo);
+        botaoRequisitoArquivo = findViewById(R.id.fabRequisitoArquivo);
+        botaoGerarGrade = findViewById(R.id.fabGerarGrade);
+        botaoPrincipal = findViewById(R.id.abrirOpcoes);
+
+        fabOpen = AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim);
+        fabClose = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
+        fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
+        toBotton = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
+
+        botaoPrincipal.setOnClickListener(v -> habilitaOpcoes());
+
+        botaoDisciplinaArquivo.setOnClickListener(v -> {
+            Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
+            fileintent.addCategory(Intent.CATEGORY_OPENABLE);
+            fileintent.setType("text/*");
+            habilitaOpcoes();
+            try {
+                csvDisciplinaLaucher.launch(fileintent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(RecyclerDisciplinaActivity.this, "ERRO", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        botaoRequisitoArquivo.setOnClickListener(v -> {
+            Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
+            fileintent.addCategory(Intent.CATEGORY_OPENABLE);
+            fileintent.setType("text/*");
+            habilitaOpcoes();
+            try {
+                csvPreRequisitoLaucher.launch(fileintent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(RecyclerDisciplinaActivity.this, "ERRO", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        botaoGerarGrade.setOnClickListener(v -> {
+            Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerGradeActivity.class);
+            startActivity(intent);
+            habilitaOpcoes();
+        });
+
         recyclerDisciplinaView = new RecyclerDisciplinaView(this);
         configurarFabNovaDisciplina();
         configuraRecycler();
@@ -121,6 +171,12 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
                 });
     }
 
+    private void habilitaOpcoes() {
+        animacaoFab(isOpen);
+        setVisibilidade(isOpen);
+        isOpen = !isOpen;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -159,10 +215,7 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        MenuItem gradeItem = menu.findItem(R.id.gerarGrade);
         MenuItem sairItem = menu.findItem(R.id.sair);
-        MenuItem importarDisciplinas = menu.findItem(R.id.importarDisciplinas);
-        MenuItem importarPreRequisito = menu.findItem(R.id.importarPreRequisitos);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -177,41 +230,11 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
             }
         });
 
-        gradeItem.setOnMenuItemClickListener(item -> {
-            Intent intent = new Intent(RecyclerDisciplinaActivity.this, RecyclerGradeActivity.class);
-            startActivity(intent);
-            return false;
-        });
-
         sairItem.setOnMenuItemClickListener(item -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(RecyclerDisciplinaActivity.this, FormLogin.class);
             startActivity(intent);
             finish();
-            return false;
-        });
-
-        importarDisciplinas.setOnMenuItemClickListener(item -> {
-            Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-            fileintent.addCategory(Intent.CATEGORY_OPENABLE);
-            fileintent.setType("text/*");
-            try {
-                csvDisciplinaLaucher.launch(fileintent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(this, "ERRO", Toast.LENGTH_SHORT).show();
-            }
-            return false;
-        });
-
-        importarPreRequisito.setOnMenuItemClickListener(item -> {
-            Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-            fileintent.addCategory(Intent.CATEGORY_OPENABLE);
-            fileintent.setType("text/*");
-            try {
-                csvPreRequisitoLaucher.launch(fileintent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(this, "ERRO", Toast.LENGTH_SHORT).show();
-            }
             return false;
         });
 
@@ -224,13 +247,49 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     }
 
     private void configurarFabNovaDisciplina() {
-        FloatingActionButton botaoNovoAluno = findViewById(R.id.novaDisciplina);
-        abrirFormularioCadastrarDisciplina(botaoNovoAluno);
+        botaoNovaDisciplina = findViewById(R.id.fabNovaDisciplina);
+        abrirFormularioCadastrarDisciplina(botaoNovaDisciplina);
+
+    }
+
+    private void animacaoFab(boolean isOpen){
+
+        if(!isOpen){
+            botaoPrincipal.startAnimation(fabOpen);
+            botaoDisciplinaArquivo.startAnimation(fromBottom);
+            botaoRequisitoArquivo.startAnimation(fromBottom);
+            botaoNovaDisciplina.startAnimation(fromBottom);
+            botaoGerarGrade.startAnimation(fromBottom);
+        } else {
+            botaoPrincipal.startAnimation(fabClose);
+            botaoDisciplinaArquivo.startAnimation(toBotton);
+            botaoRequisitoArquivo.startAnimation(toBotton);
+            botaoNovaDisciplina.startAnimation(toBotton);
+            botaoGerarGrade.startAnimation(toBotton);
+        }
+    }
+
+    private void setVisibilidade(boolean isOpen){
+
+        if(!isOpen){
+            botaoDisciplinaArquivo.setVisibility(View.VISIBLE);
+            botaoRequisitoArquivo.setVisibility(View.VISIBLE);
+            botaoNovaDisciplina.setVisibility(View.VISIBLE);
+            botaoGerarGrade.setVisibility(View.VISIBLE);
+        }else{
+            botaoDisciplinaArquivo.setVisibility(View.INVISIBLE);
+            botaoRequisitoArquivo.setVisibility(View.INVISIBLE);
+            botaoNovaDisciplina.setVisibility(View.INVISIBLE);
+            botaoGerarGrade.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     private void abrirFormularioCadastrarDisciplina(FloatingActionButton botaoNovaDisciplina) {
-        botaoNovaDisciplina.setOnClickListener(view -> startActivity(new
-                Intent(RecyclerDisciplinaActivity.this, FormDisciplina.class)));
+        botaoNovaDisciplina.setOnClickListener(v -> {
+            startActivity(new Intent(RecyclerDisciplinaActivity.this, FormDisciplina.class));
+            habilitaOpcoes();
+        });
     }
 
 }

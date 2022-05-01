@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/novaDisciplina"
+        android:id="@+id/abrirOpcoes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -26,8 +26,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         android:focusable="true"
+        app:backgroundTint="@color/soft_blue" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNovaDisciplina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/cadastrar_disciplina"
+        android:focusable="true"
         app:backgroundTint="@color/soft_blue"
-        android:contentDescription="@string/cadastrar_disciplina" />
+        app:layout_constraintBottom_toTopOf="@+id/abrirOpcoes"
+        app:layout_constraintEnd_toEndOf="@+id/abrirOpcoes"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDisciplinaArquivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/soft_blue"
+        app:layout_constraintBottom_toTopOf="@+id/fabNovaDisciplina"
+        app:layout_constraintEnd_toEndOf="@+id/fabNovaDisciplina"
+        app:srcCompat="@drawable/ic_file"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabRequisitoArquivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/soft_blue"
+        app:layout_constraintBottom_toTopOf="@+id/fabDisciplinaArquivo"
+        app:layout_constraintEnd_toEndOf="@+id/fabDisciplinaArquivo"
+        app:srcCompat="@drawable/ic_file"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabGerarGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/soft_blue"
+        app:layout_constraintBottom_toTopOf="@+id/fabRequisitoArquivo"
+        app:layout_constraintEnd_toEndOf="@+id/fabRequisitoArquivo"
+        app:srcCompat="@drawable/ic_grid"
+        android:visibility="invisible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

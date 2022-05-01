@@ -19,6 +19,7 @@ public class RecyclerGradeActivity extends AppCompatActivity {
         setTitle("Grade");
         recyclerGradeView = new RecyclerGradeView(this);
         configuraRecycler();
+
     }
 
     private void configuraRecycler() {

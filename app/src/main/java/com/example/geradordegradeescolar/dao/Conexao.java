@@ -17,7 +17,6 @@ public class Conexao {
         try {
             this.dao = new DaoOpenHelper(context);
             this.conexao = dao.getWritableDatabase();
-            Toast.makeText(context, "Conexão criada com sucesso", Toast.LENGTH_SHORT).show();
 
         } catch (SQLException ex){
 

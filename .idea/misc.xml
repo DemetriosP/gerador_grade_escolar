@@ -12,11 +12,12 @@
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/drawable/edit_text_2.xml" value="0.262" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.3675" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2465" />
+        <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/drawable/ic_search.xml" value="0.222" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.3163265306122449" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout-w936dp/activity_login.xml" value="0.181640625" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_acrescenta_requisito.xml" value="0.33" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_exibe_disciplina.xml" value="0.25" />
-        <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_form_casdastro.xml" value="0.1" />
+        <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_form_casdastro.xml" value="0.25" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_form_disciplina.xml" value="0.25" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_form_grade.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_form_login.xml" value="0.25" />
@@ -29,7 +30,7 @@
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/activity_recycler_requisito.xml" value="0.33" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/item_acrescenta.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/item_disciplina.xml" value="0.31910946196660483" />
-        <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/item_grade.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/item_grade.xml" value="0.5504840940525588" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/item_requisito.xml" value="0.33" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/recycler_row.xml" value="0.422613531047266" />
         <entry key="..\:/Users/panta/AndroidStudioProjects/GeradordeGradeEscolar/app/src/main/res/layout/teste.xml" value="0.5" />

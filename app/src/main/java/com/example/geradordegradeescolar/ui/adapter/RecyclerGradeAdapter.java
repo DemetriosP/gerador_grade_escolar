@@ -1,5 +1,6 @@
 package com.example.geradordegradeescolar.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +34,11 @@ public class RecyclerGradeAdapter extends RecyclerView.Adapter<RecyclerGradeAdap
         return new MyViewHolder(infalte);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerGradeAdapter.MyViewHolder holder, int position) {
         holder.disciplina.setText(grade.get(position).getNome());
+        holder.diaDaSemana.setText("Dia: " + grade.get(position).getDiaSemana());
     }
 
     @Override
@@ -45,6 +48,7 @@ public class RecyclerGradeAdapter extends RecyclerView.Adapter<RecyclerGradeAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
+        TextView diaDaSemana;
         TextView disciplina;
         ConstraintLayout exibirGrade;
 
@@ -52,6 +56,7 @@ public class RecyclerGradeAdapter extends RecyclerView.Adapter<RecyclerGradeAdap
             super(itemView);
             disciplina = itemView.findViewById(R.id.textGrade);
             exibirGrade = itemView.findViewById(R.id.gradeRecycler);
+            diaDaSemana = itemView.findViewById(R.id.textDiaGrade);
         }
     }
 }

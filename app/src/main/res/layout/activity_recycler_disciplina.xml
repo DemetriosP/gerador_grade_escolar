@@ -81,5 +81,53 @@
         app:srcCompat="@drawable/ic_grid"
         android:visibility="invisible"/>
 
+    <TextView
+        android:id="@+id/textAdDisciplina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Adicionar Disciplina"
+        style="@style/Text_View"
+        app:layout_constraintBottom_toBottomOf="@+id/fabNovaDisciplina"
+        app:layout_constraintEnd_toStartOf="@+id/fabNovaDisciplina"
+        app:layout_constraintTop_toTopOf="@+id/fabNovaDisciplina"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textCarregarCSVD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Carregar CSV Disciplina"
+        style="@style/Text_View"
+        app:layout_constraintBottom_toBottomOf="@+id/fabDisciplinaArquivo"
+        app:layout_constraintEnd_toStartOf="@+id/fabDisciplinaArquivo"
+        app:layout_constraintTop_toTopOf="@+id/fabDisciplinaArquivo"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textCarregarCSVR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Carregar CSV Requisitos"
+        style="@style/Text_View"
+        app:layout_constraintBottom_toBottomOf="@+id/fabRequisitoArquivo"
+        app:layout_constraintEnd_toStartOf="@+id/fabRequisitoArquivo"
+        app:layout_constraintTop_toTopOf="@+id/fabRequisitoArquivo"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textGerarGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Gerar Grade"
+        app:layout_constraintBottom_toBottomOf="@+id/fabGerarGrade"
+        app:layout_constraintEnd_toStartOf="@+id/fabGerarGrade"
+        app:layout_constraintTop_toTopOf="@+id/fabGerarGrade"
+        style="@style/Text_View"
+        android:visibility="invisible"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

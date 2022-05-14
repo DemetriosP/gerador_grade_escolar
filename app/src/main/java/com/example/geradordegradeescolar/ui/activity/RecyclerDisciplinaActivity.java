@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -37,9 +38,9 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> csvDisciplinaLaucher;
     private ActivityResultLauncher<Intent> csvPreRequisitoLaucher;
     private Animation fabOpen, fabClose, fromBottom, toBotton;
-    FloatingActionButton botaoDisciplinaArquivo, botaoRequisitoArquivo, botaoGerarGrade, botaoPrincipal, botaoNovaDisciplina;
+    private FloatingActionButton botaoDisciplinaArquivo, botaoRequisitoArquivo, botaoGerarGrade, botaoPrincipal, botaoNovaDisciplina;
+    private TextView textAdDisciplina, textCarregarCSVD, textCarregarCSVR, textGerarGrade;
     boolean isOpen = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,11 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
         fabClose = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
         toBotton = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
+
+        textAdDisciplina = findViewById(R.id.textAdDisciplina);
+        textCarregarCSVD = findViewById(R.id.textCarregarCSVD);
+        textCarregarCSVR = findViewById(R.id.textCarregarCSVR);
+        textGerarGrade = findViewById(R.id.textGerarGrade);
 
         botaoPrincipal.setOnClickListener(v -> habilitaOpcoes());
 
@@ -276,11 +282,20 @@ public class RecyclerDisciplinaActivity extends AppCompatActivity {
             botaoRequisitoArquivo.setVisibility(View.VISIBLE);
             botaoNovaDisciplina.setVisibility(View.VISIBLE);
             botaoGerarGrade.setVisibility(View.VISIBLE);
+            textAdDisciplina.setVisibility(View.VISIBLE);
+            textCarregarCSVD.setVisibility(View.VISIBLE);
+            textCarregarCSVR.setVisibility(View.VISIBLE);
+            textGerarGrade.setVisibility(View.VISIBLE);
+
         }else{
             botaoDisciplinaArquivo.setVisibility(View.INVISIBLE);
             botaoRequisitoArquivo.setVisibility(View.INVISIBLE);
             botaoNovaDisciplina.setVisibility(View.INVISIBLE);
             botaoGerarGrade.setVisibility(View.INVISIBLE);
+            textAdDisciplina.setVisibility(View.INVISIBLE);
+            textCarregarCSVD.setVisibility(View.INVISIBLE);
+            textCarregarCSVR.setVisibility(View.INVISIBLE);
+            textGerarGrade.setVisibility(View.INVISIBLE);
         }
 
     }

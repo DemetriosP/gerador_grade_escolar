@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class FormLogin extends AppCompatActivity {
 
-    private TextView cadastrese;
+    private TextView cadastrese, esqueceuSenha;
     private EditText etEmail, etSenha;
     private Button btEntrar;
     private String email, senha;
@@ -31,6 +31,7 @@ public class FormLogin extends AppCompatActivity {
         setContentView(R.layout.activity_form_login);
         iniciarComponentes();
         vaiTelaCadastrese();
+        vaiTelaRecuperarSenha();
         entrar();
     }
 
@@ -92,11 +93,21 @@ public class FormLogin extends AppCompatActivity {
         finish();
     }
 
+    private void vaiTelaRecuperarSenha(){
+        esqueceuSenha.setOnClickListener(v -> {
+            Intent intent = new Intent(FormLogin.this, RecuperarSenha.class);
+            startActivity(intent);
+            finish();
+        });
+
+    }
+
     private void iniciarComponentes(){
         cadastrese = findViewById(R.id.textCadastrese);
         etEmail = findViewById(R.id.editEmail);
         etSenha = findViewById(R.id.editSenha);
         btEntrar = findViewById(R.id.btEntrar);
+        esqueceuSenha = findViewById(R.id.textRecpSenha);
     }
 
     private void converteComponentesString(){

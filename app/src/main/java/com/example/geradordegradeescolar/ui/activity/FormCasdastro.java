@@ -68,6 +68,7 @@ public class FormCasdastro extends AppCompatActivity {
                 addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         mensagem(v, "Usuário cadastrado");
+                        vaiTelaRecyclerDisciplina();
                     } else {
                         String erro;
                         try {
@@ -92,6 +93,12 @@ public class FormCasdastro extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    private void vaiTelaRecyclerDisciplina(){
+        Intent intent = new Intent(FormCasdastro.this, RecyclerDisciplinaActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void iniciarComponentes() {

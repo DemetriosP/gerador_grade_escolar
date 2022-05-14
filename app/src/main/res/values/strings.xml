@@ -32,6 +32,7 @@
     <string name="sair">Sair</string>
     <string name="importar_disciplinas">Importar Disciplinas</string>
     <string name="importar_pr_requisitos">Importar Pré-Requisitos</string>
+    <string name="enviar">Enviar</string>
 
     <string-array name="situacao">
         <item>Cursado</item>

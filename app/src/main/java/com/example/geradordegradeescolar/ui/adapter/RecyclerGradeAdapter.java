@@ -48,9 +48,9 @@ public class RecyclerGradeAdapter extends RecyclerView.Adapter<RecyclerGradeAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView diaDaSemana;
-        TextView disciplina;
-        ConstraintLayout exibirGrade;
+        final TextView diaDaSemana;
+        final TextView disciplina;
+        final ConstraintLayout exibirGrade;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

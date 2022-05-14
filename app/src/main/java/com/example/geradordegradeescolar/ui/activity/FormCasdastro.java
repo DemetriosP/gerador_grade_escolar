@@ -17,8 +17,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class FormCasdastro extends AppCompatActivity {
@@ -44,14 +42,14 @@ public class FormCasdastro extends AppCompatActivity {
 
             converteComponentesString();
 
-            if(verificaCampos()) {
-                if(comprarSenhas()) cadastrarUsuarioFirebase(v);
+            if (verificaCampos()) {
+                if (comprarSenhas()) cadastrarUsuarioFirebase(v);
                 else mensagem(v, "As senhas não correpondem");
             } else mensagem(v, "Preencha todos os campos!");
         });
     }
 
-    private void mensagem(View v, String mensagem){
+    private void mensagem(View v, String mensagem) {
         Snackbar snackbar = Snackbar.make(v, mensagem, Snackbar.LENGTH_LONG);
         snackbar.setBackgroundTint(Color.WHITE);
         snackbar.setTextColor(Color.BLACK);
@@ -95,7 +93,7 @@ public class FormCasdastro extends AppCompatActivity {
         });
     }
 
-    private void vaiTelaRecyclerDisciplina(){
+    private void vaiTelaRecyclerDisciplina() {
         Intent intent = new Intent(FormCasdastro.this, RecyclerDisciplinaActivity.class);
         startActivity(intent);
         finish();
@@ -114,7 +112,7 @@ public class FormCasdastro extends AppCompatActivity {
         return senha.equals(confirmarSenha);
     }
 
-    private void converteComponentesString(){
+    private void converteComponentesString() {
         senha = etSenha.getText().toString();
         email = etEmail.getText().toString();
         confirmarSenha = etConfirmarSenha.getText().toString();

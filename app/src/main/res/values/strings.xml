@@ -33,6 +33,8 @@
     <string name="importar_disciplinas">Importar Disciplinas</string>
     <string name="importar_pr_requisitos">Importar Pré-Requisitos</string>
     <string name="enviar">Enviar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="n_s_lhe_enviaremos_um_link_de_redefini_o">Nós lhe enviaremos um link de redefinição</string>
 
     <string-array name="situacao">
         <item>Cursado</item>

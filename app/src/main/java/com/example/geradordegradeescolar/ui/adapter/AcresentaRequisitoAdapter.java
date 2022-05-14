@@ -1,5 +1,6 @@
 package com.example.geradordegradeescolar.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -88,7 +89,7 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
         return requisitosFiltro;
     }
 
-    public Filter requisitosFiltro = new Filter() {
+    public final Filter requisitosFiltro = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Disciplina> requisitosFiltrados = new ArrayList<>();
@@ -112,6 +113,7 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
             return resultados;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             requisitos.clear();
@@ -123,9 +125,9 @@ public class AcresentaRequisitoAdapter extends RecyclerView.Adapter<AcresentaReq
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView requisito;
-        ConstraintLayout exibirRequisito;
-        CardView cardRequisito;
+        final TextView requisito;
+        final ConstraintLayout exibirRequisito;
+        final CardView cardRequisito;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

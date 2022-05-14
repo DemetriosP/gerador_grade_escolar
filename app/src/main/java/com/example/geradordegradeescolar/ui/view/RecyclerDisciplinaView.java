@@ -1,16 +1,9 @@
 package com.example.geradordegradeescolar.ui.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.database.SQLException;
-import android.util.Log;
 import android.view.MenuItem;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +11,6 @@ import com.example.geradordegradeescolar.dao.Conexao;
 import com.example.geradordegradeescolar.dao.DisciplinaDAO;
 import com.example.geradordegradeescolar.model.Disciplina;
 import com.example.geradordegradeescolar.ui.adapter.RecyclerDisciplinaAdapter;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class RecyclerDisciplinaView {
 
@@ -33,6 +22,7 @@ public class RecyclerDisciplinaView {
     }
 
     private final Conexao conexao;
+
     public DisciplinaDAO getDisciplinaDAO() {
         return disciplinaDAO;
     }

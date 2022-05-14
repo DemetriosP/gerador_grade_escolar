@@ -14,7 +14,7 @@
         android:layout_marginTop="200dp"
         android:text="@string/esqueceu_sua_senha"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Nós lhe enviaremos um link de redefinição"
+        android:textSize="18sp"
+        android:text="@string/n_s_lhe_enviaremos_um_link_de_redefini_o"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEsqueceuSuaSenha" />
@@ -67,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

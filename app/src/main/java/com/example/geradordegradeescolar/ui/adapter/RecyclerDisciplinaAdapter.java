@@ -1,5 +1,6 @@
 package com.example.geradordegradeescolar.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
         return disciplinasFiltro;
     }
 
-    public Filter disciplinasFiltro = new Filter() {
+    public final Filter disciplinasFiltro = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Disciplina> disciplinasFiltradas = new ArrayList<>();
@@ -85,6 +86,7 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
             return resultados;
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             disciplinas.clear();
@@ -95,9 +97,9 @@ public class RecyclerDisciplinaAdapter extends RecyclerView.Adapter<RecyclerDisc
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
-        TextView disciplina;
-        ConstraintLayout exibirDisciplina;
-        CardView cardDisciplina;
+        final TextView disciplina;
+        final ConstraintLayout exibirDisciplina;
+        final CardView cardDisciplina;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

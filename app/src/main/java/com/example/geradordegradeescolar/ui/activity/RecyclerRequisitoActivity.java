@@ -2,12 +2,10 @@ package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geradordegradeescolar.R;
@@ -66,7 +64,7 @@ public class RecyclerRequisitoActivity extends AppCompatActivity {
     private void abreAcrescentarDisciplina(FloatingActionButton botaoAcrescentaRequisito) {
         Intent dados = getIntent();
         Intent intent = new Intent(RecyclerRequisitoActivity.this, AcrescentaRequisitoActivity.class);
-        intent.putExtra("disciplina", (Disciplina) dados.getSerializableExtra("disciplina"));
+        intent.putExtra("disciplina", dados.getSerializableExtra("disciplina"));
         botaoAcrescentaRequisito.setOnClickListener(v -> startActivity(intent));
     }
 

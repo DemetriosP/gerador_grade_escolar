@@ -53,9 +53,9 @@ public class RecyclerRequisitoAdapter extends RecyclerView.Adapter<RecyclerRequi
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
-        TextView requisito;
-        ConstraintLayout exibirRequisito;
-        CardView cardRequisito;
+        final TextView requisito;
+        final ConstraintLayout exibirRequisito;
+        final CardView cardRequisito;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

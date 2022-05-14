@@ -3,7 +3,6 @@ package com.example.geradordegradeescolar.dao;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -12,13 +11,13 @@ public class Conexao {
     DaoOpenHelper dao;
     SQLiteDatabase conexao;
 
-    public Conexao(Context context){
+    public Conexao(Context context) {
 
         try {
             this.dao = new DaoOpenHelper(context);
             this.conexao = dao.getWritableDatabase();
 
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
 
             AlertDialog.Builder dlg = new AlertDialog.Builder(context);
             dlg.setTitle("Erro");

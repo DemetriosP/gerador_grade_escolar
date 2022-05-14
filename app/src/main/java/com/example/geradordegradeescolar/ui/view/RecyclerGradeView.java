@@ -19,7 +19,7 @@ public class RecyclerGradeView {
     private final RecyclerGradeAdapter adapter;
     private final DisciplinaDAO disciplinaDAO;
     private final Grade grade;
-    private List<Disciplina> gradeGerada;
+    private final List<Disciplina> gradeGerada;
 
     public RecyclerGradeView(Context contexto) {
         this.contexto = contexto;

@@ -26,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
         android:focusable="true"
+        app:tint="@color/white"
         app:backgroundTint="@color/soft_blue"
         android:contentDescription="@string/acrescentar_requisito" />
 

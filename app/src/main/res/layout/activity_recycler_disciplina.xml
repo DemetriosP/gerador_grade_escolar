@@ -24,7 +24,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white"
         android:focusable="true"
         app:backgroundTint="@color/soft_blue" />
 
@@ -39,7 +40,8 @@
         app:backgroundTint="@color/soft_blue"
         app:layout_constraintBottom_toTopOf="@+id/abrirOpcoes"
         app:layout_constraintEnd_toEndOf="@+id/abrirOpcoes"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white"
         android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,6 +55,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fabNovaDisciplina"
         app:layout_constraintEnd_toEndOf="@+id/fabNovaDisciplina"
         app:srcCompat="@drawable/ic_file"
+        app:tint="@color/white"
         android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -66,6 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fabDisciplinaArquivo"
         app:layout_constraintEnd_toEndOf="@+id/fabDisciplinaArquivo"
         app:srcCompat="@drawable/ic_file"
+        app:tint="@color/white"
         android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -79,6 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fabRequisitoArquivo"
         app:layout_constraintEnd_toEndOf="@+id/fabRequisitoArquivo"
         app:srcCompat="@drawable/ic_grid"
+        app:tint="@color/white"
         android:visibility="invisible"/>
 
     <TextView
@@ -86,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
         android:text="Adicionar Disciplina"
         style="@style/Text_View"
         app:layout_constraintBottom_toBottomOf="@+id/fabNovaDisciplina"
@@ -103,6 +109,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fabDisciplinaArquivo"
         app:layout_constraintEnd_toStartOf="@+id/fabDisciplinaArquivo"
         app:layout_constraintTop_toTopOf="@+id/fabDisciplinaArquivo"
+        android:textColor="@color/white"
         android:visibility="invisible"/>
 
     <TextView
@@ -115,7 +122,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/fabRequisitoArquivo"
         app:layout_constraintEnd_toStartOf="@+id/fabRequisitoArquivo"
         app:layout_constraintTop_toTopOf="@+id/fabRequisitoArquivo"
-        android:visibility="invisible" />
+        android:textColor="@color/white"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/textGerarGrade"
@@ -127,6 +135,7 @@
         app:layout_constraintEnd_toStartOf="@+id/fabGerarGrade"
         app:layout_constraintTop_toTopOf="@+id/fabGerarGrade"
         style="@style/Text_View"
+        android:textColor="@color/white"
         android:visibility="invisible"/>
 
 

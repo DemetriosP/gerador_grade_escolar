@@ -35,6 +35,7 @@
     <string name="enviar">Enviar</string>
     <string name="cancelar">Cancelar</string>
     <string name="n_s_lhe_enviaremos_um_link_de_redefini_o">Nós lhe enviaremos um link de redefinição</string>
+    <string name="um_link_para_redefini_o_ser_enviado_no_seu_email">Um link para redefinição será enviado no seu email</string>
 
     <string-array name="situacao">
         <item>Cursado</item>

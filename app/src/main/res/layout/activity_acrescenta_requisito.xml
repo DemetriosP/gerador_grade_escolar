@@ -27,6 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:focusable="true"
+        app:tint="@color/white"
         app:backgroundTint="@color/soft_blue"
         android:contentDescription="@string/confirma_requisito" />
 

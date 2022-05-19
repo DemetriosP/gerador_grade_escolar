@@ -27,7 +27,7 @@
         app:srcCompat="@drawable/ic_add"
         app:tint="@color/white"
         android:focusable="true"
-        app:backgroundTint="@color/soft_blue" />
+        app:backgroundTint="@color/black" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNovaDisciplina"
@@ -37,7 +37,7 @@
         android:clickable="true"
         android:contentDescription="@string/cadastrar_disciplina"
         android:focusable="true"
-        app:backgroundTint="@color/soft_blue"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/abrirOpcoes"
         app:layout_constraintEnd_toEndOf="@+id/abrirOpcoes"
         app:srcCompat="@drawable/ic_add"
@@ -51,7 +51,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/soft_blue"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fabNovaDisciplina"
         app:layout_constraintEnd_toEndOf="@+id/fabNovaDisciplina"
         app:srcCompat="@drawable/ic_file"
@@ -65,7 +65,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/soft_blue"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fabDisciplinaArquivo"
         app:layout_constraintEnd_toEndOf="@+id/fabDisciplinaArquivo"
         app:srcCompat="@drawable/ic_file"
@@ -79,7 +79,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/soft_blue"
+        app:backgroundTint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/fabRequisitoArquivo"
         app:layout_constraintEnd_toEndOf="@+id/fabRequisitoArquivo"
         app:srcCompat="@drawable/ic_grid"

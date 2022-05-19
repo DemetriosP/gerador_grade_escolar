@@ -73,6 +73,7 @@ public class FormLogin extends AppCompatActivity {
                         }catch (Exception e){
                             Toast.makeText(this, "Login efetuado com sucesso",
                                     Toast.LENGTH_LONG).show();
+                            vaiTelaDisciplina();
                         }
                     }
                 });

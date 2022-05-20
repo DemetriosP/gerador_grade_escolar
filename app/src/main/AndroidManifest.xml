@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeradorDeGradeEscolar">
         <activity
+            android:name=".ui.activity.FormLogin"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RecuperarSenha"
             android:exported="false" />
         <activity
@@ -31,7 +34,7 @@
             android:name=".ui.activity.FormCasdastro"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.FormLogin"
+            android:name=".ui.activity.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,7 @@
 package com.example.geradordegradeescolar.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.geradordegradeescolar.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -67,13 +69,18 @@ public class FormLogin extends AppCompatActivity {
                     if(task.isSuccessful()){
                         //progressBar.setVisibility(v.VISIBLE);
                         new Handler().postDelayed(this::vaiTelaDisciplina, 1000);
+                        Toast.makeText(this, "Login efetuado com sucesso",
+                                Toast.LENGTH_LONG).show();
                     }else{
+                        String erro;
                         try {
                             throw Objects.requireNonNull(task.getException());
                         }catch (Exception e){
-                            Toast.makeText(this, "Login efetuado com sucesso",
-                                    Toast.LENGTH_LONG).show();
-                            vaiTelaDisciplina();
+                            erro = "E-mail ou senha estão incorretos";
+                            Snackbar snackbar = Snackbar.make(v, erro, Snackbar.LENGTH_LONG);
+                            snackbar.setBackgroundTint(Color.WHITE);
+                            snackbar.setTextColor(Color.BLACK);
+                            snackbar.show();
                         }
                     }
                 });

@@ -139,7 +139,7 @@ public class FormDisciplina extends AppCompatActivity {
         if (disciplina.getSituacao().equals(situacoes[2])) {
             alteraVisbilidadeCampos(View.VISIBLE);
             autoDia.setText(disciplina.getDiaSemana(), false);
-            autoPeriodo.setText(String.valueOf(disciplina.getPeriodo()));
+            autoPeriodo.setText(disciplina.getPeriodo(), false);
         }
 
     }

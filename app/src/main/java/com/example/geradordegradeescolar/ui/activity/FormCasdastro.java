@@ -78,7 +78,7 @@ public class FormCasdastro extends AppCompatActivity {
                         } catch (FirebaseAuthInvalidCredentialsException e) {
                             erro = "E-mail inválido";
                         } catch (Exception e) {
-                            erro = "Erro ao cadastrar usuário";
+                            erro = e.getMessage();
                         }
                         mensagem(v, erro);
                     }

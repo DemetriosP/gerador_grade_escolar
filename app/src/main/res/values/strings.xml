@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gerador de Grade Escolar</string>
+    <string name="app_name">Curriculum</string>
     <string name="entrar">Entrar</string>
     <string name="email">Email</string>
     <string name="senha">Senha</string>
@@ -17,7 +17,7 @@
     <string name="horario_final">Horário Final</string>
     <string name="salvar">Salvar</string>
     <string name="disciplina">Disciplina</string>
-    <string name="cadastrar_disciplina">Cadastrar disciplina</string>
+    <string name="cadastrar_disciplina">Cadastrar Disciplina</string>
     <string name="remover">Remover</string>
     <string name="requisitos">Requisitos</string>
     <string name="acrescentar_requisito">Acrescentar Requisito</string>
@@ -28,16 +28,16 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="adicionar">Adicionar</string>
     <string name="grade">Grade</string>
-    <string name="gerar_grade">Gerar grade</string>
+    <string name="gerar_grade">Gerar Grade</string>
     <string name="sair">Sair</string>
     <string name="importar_disciplinas">Importar Disciplinas</string>
-    <string name="importar_pr_requisitos">Importar Pré-Requisitos</string>
+    <string name="importar_pr_requisitos">Importar Requisitos</string>
     <string name="enviar">Enviar</string>
     <string name="cancelar">Cancelar</string>
     <string name="n_s_lhe_enviaremos_um_link_de_redefini_o">Nós lhe enviaremos um link de redefinição</string>
     <string name="um_link_para_redefini_o_ser_enviado_no_seu_email">Um link para redefinição será enviado no seu email</string>
     <string name="voltar">Voltar</string>
-    <string name="carregar_csv_disciplina">Carregar CSV Disciplina</string>
+    <string name="carregar_csv_disciplina">Carregar CSV Disciplinas</string>
     <string name="carregar_csv_requisitos">Carregar CSV Requisitos</string>
 
     <string-array name="situacao">
